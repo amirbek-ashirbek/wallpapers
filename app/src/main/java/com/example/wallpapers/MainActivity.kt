@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.wallpapers.feature_wallpapers.presentation.WallpapersScreen
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpapersScreen
 import com.example.wallpapers.navigation.WallpapersScreen
 import com.example.wallpapers.ui.theme.WallpapersTheme
 import dagger.hilt.android.AndroidEntryPoint

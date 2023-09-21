@@ -2,7 +2,7 @@ package com.example.wallpapers.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.wallpapers.feature_wallpapers.data.local.WallpaperDatabase
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.WallpaperDatabase
 import com.example.wallpapers.util.Constants.WALLPAPER_DATABASE
 import dagger.Module
 import dagger.Provides
