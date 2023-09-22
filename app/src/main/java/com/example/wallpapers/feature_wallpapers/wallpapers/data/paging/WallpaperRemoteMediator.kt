@@ -59,11 +59,12 @@ class WallpaperRemoteMediator @Inject constructor(
 			wallpaperDatabase.withTransaction {
 				if (loadType == LoadType.REFRESH) {
 					wallpaperDao.clearAll(categoryId = categoryId)
-					wallpaperRemoteKeysDao.clearAll()
+					wallpaperRemoteKeysDao.clearAll(categoryId = categoryId)
 				}
 				val keys = response.map { imageResponse ->
 					WallpaperRemoteKeys(
 						id = imageResponse.id,
+						categoryId = categoryId,
 						prevPage = prevPage,
 						nextPage = nextPage
 					)
@@ -76,7 +77,7 @@ class WallpaperRemoteMediator @Inject constructor(
 						categoryId = categoryId
 					)
 				}
-				wallpaperDao.insertAll(wallpapers = wallpapers)
+				wallpaperDao.upsertAll(wallpapers = wallpapers)
 			}
 			MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
 		} catch (e: IOException) {
@@ -91,7 +92,7 @@ class WallpaperRemoteMediator @Inject constructor(
 	): WallpaperRemoteKeys? {
 		return state.anchorPosition?.let { position ->
 			state.closestItemToPosition(position)?.id?.let { id ->
-				wallpaperRemoteKeysDao.getRemoteKeys(id = id)
+				wallpaperRemoteKeysDao.getRemoteKeys(id = id, categoryId = categoryId)
 			}
 		}
 	}
@@ -104,7 +105,7 @@ class WallpaperRemoteMediator @Inject constructor(
 		val lastItem = lastPage?.data?.lastOrNull()
 
 		return lastItem?.let { wallpaperEntity ->
-			wallpaperRemoteKeysDao.getRemoteKeys(id = wallpaperEntity.id)
+			wallpaperRemoteKeysDao.getRemoteKeys(id = wallpaperEntity.id, categoryId = wallpaperEntity.categoryId)
 		}
 
 	}

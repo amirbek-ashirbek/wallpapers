@@ -67,7 +67,7 @@ class WallpaperCategoryRemoteMediator @Inject constructor(
 				categoryRemoteKeysDao.addAllRemoteKeys(remoteKeys = keys)
 
 				val categories = response.map { TopicResponse.toWallpaperCategoryEntity(it) }
-				categoryDao.insertAll(categories = categories)
+				categoryDao.upsertAll(categories = categories)
 			}
 			MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
 		} catch (e: IOException) {
