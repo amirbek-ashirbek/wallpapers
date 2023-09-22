@@ -16,6 +16,7 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class WallpaperRemoteMediator @Inject constructor(
+	private val categoryId: String,
 	private val unsplashApi: UnsplashApi,
 	private val wallpaperDatabase: WallpaperDatabase
 ) : RemoteMediator<Int, WallpaperEntity>() {
@@ -46,7 +47,10 @@ class WallpaperRemoteMediator @Inject constructor(
 				}
 			}
 
-			val response = unsplashApi.getImages(page = currentPage)
+			val response = unsplashApi.getImages(
+				page = currentPage,
+				categoryId = categoryId
+			)
 			val endOfPaginationReached = response.isEmpty()
 
 			val prevPage = if (currentPage == 1) null else currentPage - 1
@@ -66,7 +70,12 @@ class WallpaperRemoteMediator @Inject constructor(
 				}
 				wallpaperRemoteKeysDao.addAllRemoteKeys(remoteKeys = keys)
 
-				val wallpapers = response.map { ImageResponse.toWallpaperEntity(it) }
+				val wallpapers = response.map { imageResponse ->
+					ImageResponse.toWallpaperEntity(
+						imageResponse = imageResponse,
+						categoryId = categoryId
+					)
+				}
 				wallpaperDao.insertAll(wallpapers = wallpapers)
 			}
 			MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)

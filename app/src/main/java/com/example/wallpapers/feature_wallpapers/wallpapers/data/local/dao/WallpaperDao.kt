@@ -13,8 +13,8 @@ interface WallpaperDao {
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun insertAll(wallpapers: List<WallpaperEntity>)
 
-	@Query("SELECT * FROM wallpapers")
-	fun pagingSource(): PagingSource<Int, WallpaperEntity>
+	@Query("SELECT * FROM wallpapers WHERE categoryId LIKE :categoryId")
+	fun pagingSource(categoryId: String): PagingSource<Int, WallpaperEntity>
 
 	@Query("DELETE FROM  wallpapers")
 	suspend fun clearAll()

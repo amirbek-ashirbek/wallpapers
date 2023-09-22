@@ -5,13 +5,15 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.im
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.topics.TopicResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UnsplashApi {
 
 	@Headers("Authorization: Client-ID ${BuildConfig.UNSPLASH_API_KEY}")
-	@GET("photos")
+	@GET("topics/{id_or_slug}/photos")
 	suspend fun getImages(
+		@Path("id_or_slug") categoryId: String,
 		@Query("page") page: Int,
 		@Query("per_page") perPage: Int? = null
 	): List<ImageResponse>

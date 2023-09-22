@@ -9,12 +9,14 @@ import com.example.wallpapers.util.Constants.WALLPAPERS_TABLE
 data class WallpaperEntity(
 	@PrimaryKey
 	val id: String,
+	val categoryId: String,
 	val url: String
 ) {
 	companion object {
 		fun toWallpaper(wallpaperEntity: WallpaperEntity): Wallpaper {
 			return Wallpaper(
 				id = wallpaperEntity.id,
+				categoryId = wallpaperEntity.categoryId,
 				url = wallpaperEntity.url
 			)
 		}
@@ -22,6 +24,7 @@ data class WallpaperEntity(
 		fun toWallpaperEntity(wallpaper: Wallpaper): WallpaperEntity {
 			return WallpaperEntity(
 				id = wallpaper.id,
+				categoryId = wallpaper.categoryId,
 				url = wallpaper.url
 			)
 		}

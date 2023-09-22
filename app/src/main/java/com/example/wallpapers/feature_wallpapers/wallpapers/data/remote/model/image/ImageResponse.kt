@@ -34,9 +34,10 @@ data class ImageResponse(
 ) {
     companion object {
 
-        fun toWallpaperEntity(imageResponse: ImageResponse): WallpaperEntity {
+        fun toWallpaperEntity(imageResponse: ImageResponse, categoryId: String): WallpaperEntity {
             return WallpaperEntity(
                 id = imageResponse.id,
+                categoryId = categoryId,
                 url = imageResponse.urls.regular
             )
         }
