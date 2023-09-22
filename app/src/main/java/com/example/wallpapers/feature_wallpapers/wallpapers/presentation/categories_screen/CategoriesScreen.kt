@@ -1,6 +1,8 @@
-package com.example.wallpapers.feature_wallpapers.wallpapers.presentation
+package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.categories_screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -24,8 +26,8 @@ import coil.compose.AsyncImage
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
 
 @Composable
-fun WallpapersScreen(
-	viewModel: WallpapersViewModel = hiltViewModel()
+fun CategoriesScreen(
+	viewModel: CategoriesViewModel = hiltViewModel()
 ) {
 
 //	val wallpapersLazyPagingItems: LazyPagingItems<Wallpaper> = viewModel.wallpapersPaged.collectAsLazyPagingItems()
@@ -38,9 +40,9 @@ fun WallpapersScreen(
 
 		LazyVerticalGrid(
 			columns = GridCells.Fixed(2),
+			contentPadding = PaddingValues(8.dp),
 			modifier = Modifier
 				.fillMaxSize()
-				.padding(horizontal = 16.dp)
 		) {
 
 			items(
@@ -51,7 +53,16 @@ fun WallpapersScreen(
 				val category: WallpaperCategory? = categoriesLazyPagingItems[index]
 
 				if (category != null) {
-					Box {
+					Box(
+						modifier = Modifier
+							.padding(8.dp)
+							.clip(RoundedCornerShape(8.dp))
+							.clickable(
+								onClick = {
+
+								}
+							)
+					) {
 						AsyncImage(
 							model = category.coverPhotoUrl,
 							contentDescription = null,
@@ -59,8 +70,6 @@ fun WallpapersScreen(
 							modifier = Modifier
 								.fillMaxSize()
 								.aspectRatio(1f)
-								.padding(8.dp)
-								.clip(RoundedCornerShape(8.dp))
 						)
 						Text(
 							text = category.title,

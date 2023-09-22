@@ -1,4 +1,4 @@
-package com.example.wallpapers.feature_wallpapers.wallpapers.presentation
+package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.categories_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,12 +11,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class WallpapersViewModel @Inject constructor(
+class CategoriesViewModel @Inject constructor(
 	wallpaperRepository: WallpaperRepository
 ) : ViewModel() {
-
-//	val wallpapersPaged: Flow<PagingData<Wallpaper>> = wallpaperRepository.getAllWallpapers()
-//		.cachedIn(viewModelScope)
 
 	val categoriesPaged: Flow<PagingData<WallpaperCategory>> = wallpaperRepository.getAllWallpaperCategories()
 		.cachedIn(viewModelScope)
