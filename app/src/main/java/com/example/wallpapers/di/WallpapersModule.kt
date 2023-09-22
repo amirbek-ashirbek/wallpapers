@@ -1,8 +1,8 @@
 package com.example.wallpapers.di
 
-import com.example.wallpapers.feature_wallpapers.data.local.WallpaperDatabase
-import com.example.wallpapers.feature_wallpapers.data.remote.UnsplashApi
-import com.example.wallpapers.feature_wallpapers.data.repository.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.WallpaperDatabase
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.WallpaperRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,10 +15,13 @@ object WallpapersModule {
 
 	@Singleton
 	@Provides
-	fun provideWallpaperRepository(unsplashApi: UnsplashApi, wallpaperDatabase: WallpaperDatabase): WallpaperRepository {
+	fun provideWallpaperRepository(
+		unsplashApi: UnsplashApi,
+		wallpaperDatabase: WallpaperDatabase,
+	): WallpaperRepository {
 		return WallpaperRepository(
 			unsplashApi = unsplashApi,
-			wallpaperDatabase = wallpaperDatabase
+			wallpaperDatabase = wallpaperDatabase,
 		)
 	}
 

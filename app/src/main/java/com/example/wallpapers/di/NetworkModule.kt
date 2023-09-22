@@ -2,7 +2,7 @@ package com.example.wallpapers.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.wallpapers.feature_wallpapers.data.remote.UnsplashApi
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
 import com.example.wallpapers.util.Constants.UNSPLASH_BASE_URL
 import dagger.Module
 import dagger.Provides
