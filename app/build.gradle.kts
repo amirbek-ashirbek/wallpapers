@@ -81,6 +81,9 @@ dependencies {
 	debugImplementation("androidx.compose.ui:ui-tooling")
 	debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+	// Compose
+	implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
 	// Navigation
 	implementation("androidx.navigation:navigation-compose:2.7.2")
 
@@ -116,4 +119,8 @@ dependencies {
 	// Chucker
 	debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
 	releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
+
+
 }

@@ -58,7 +58,7 @@ class WallpaperRemoteMediator @Inject constructor(
 
 			wallpaperDatabase.withTransaction {
 				if (loadType == LoadType.REFRESH) {
-					wallpaperDao.clearAll()
+					wallpaperDao.clearAll(categoryId = categoryId)
 					wallpaperRemoteKeysDao.clearAll()
 				}
 				val keys = response.map { imageResponse ->

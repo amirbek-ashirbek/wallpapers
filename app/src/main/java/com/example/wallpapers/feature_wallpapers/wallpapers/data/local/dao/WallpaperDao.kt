@@ -16,7 +16,7 @@ interface WallpaperDao {
 	@Query("SELECT * FROM wallpapers WHERE categoryId LIKE :categoryId")
 	fun pagingSource(categoryId: String): PagingSource<Int, WallpaperEntity>
 
-	@Query("DELETE FROM  wallpapers")
-	suspend fun clearAll()
+	@Query("DELETE FROM  wallpapers WHERE categoryId LIKE :categoryId")
+	suspend fun clearAll(categoryId: String)
 
 }
