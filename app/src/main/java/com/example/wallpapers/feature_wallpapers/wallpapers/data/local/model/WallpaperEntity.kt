@@ -20,13 +20,5 @@ data class WallpaperEntity(
 				url = wallpaperEntity.url
 			)
 		}
-
-		fun toWallpaperEntity(wallpaper: Wallpaper): WallpaperEntity {
-			return WallpaperEntity(
-				id = wallpaper.id,
-				categoryId = wallpaper.categoryId,
-				url = wallpaper.url
-			)
-		}
 	}
 }

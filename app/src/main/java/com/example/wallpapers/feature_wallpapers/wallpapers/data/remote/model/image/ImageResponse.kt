@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ImageResponse(
     @Json(name = "blur_hash")
-    val blurHash: String,
+    val blurHash: String?,
     @Json(name = "color")
     val color: String,
     @Json(name = "created_at")

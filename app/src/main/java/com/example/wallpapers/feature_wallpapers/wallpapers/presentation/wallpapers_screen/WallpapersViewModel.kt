@@ -8,6 +8,7 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.Wall
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,5 +24,26 @@ class WallpapersViewModel @Inject constructor(
 
 	val wallpapers = wallpaperRepository.getWallpapersByCategory(categoryId = categoryId)
 		.cachedIn(viewModelScope)
+
+	fun onEvent(event: WallpapersEvent) {
+		when (event) {
+			is WallpapersEvent.WallpaperClicked -> {
+				_uiState.update {
+					it.copy(
+						isWallpaperVisibleInFullScreen = true,
+						wallpaperInFullScreen = event.wallpaper
+					)
+				}
+			}
+			is WallpapersEvent.WallpaperDismissed -> {
+				_uiState.update {
+					it.copy(
+						isWallpaperVisibleInFullScreen = false,
+						wallpaperInFullScreen = null
+					)
+				}
+			}
+		}
+	}
 
 }

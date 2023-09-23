@@ -63,7 +63,8 @@ fun WallpapersNavHost(
 			val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 			WallpapersScreen(
 				uiState = uiState,
-				wallpapers = wallpapers
+				wallpapers = wallpapers,
+				onWallpapersEvent = viewModel::onEvent
 			)
 		}
 	}

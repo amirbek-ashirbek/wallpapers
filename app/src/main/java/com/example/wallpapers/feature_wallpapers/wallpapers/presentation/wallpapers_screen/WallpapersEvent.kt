@@ -2,7 +2,7 @@ package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpa
 
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
 
-data class WallpapersState(
-	val isWallpaperVisibleInFullScreen: Boolean = false,
-	val wallpaperInFullScreen: Wallpaper? = null
-)
+sealed class WallpapersEvent {
+	data class WallpaperClicked(val wallpaper: Wallpaper) : WallpapersEvent()
+	data object WallpaperDismissed : WallpapersEvent()
+}
