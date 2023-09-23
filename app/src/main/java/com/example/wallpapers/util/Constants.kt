@@ -11,6 +11,6 @@ object Constants {
 	const val WALLPAPERS_TABLE = "wallpapers"
 	const val WALLPAPER_CATEGORIES_TABLE = "wallpaper_categories"
 
-	const val ITEMS_PER_PAGE = 10
+	const val ITEMS_PER_PAGE = 20
 
 }

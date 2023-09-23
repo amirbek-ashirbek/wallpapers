@@ -15,7 +15,8 @@ interface UnsplashApi {
 	suspend fun getImages(
 		@Path("id_or_slug") categoryId: String,
 		@Query("page") page: Int,
-		@Query("per_page") perPage: Int? = null
+		@Query("per_page") perPage: Int? = null,
+		@Query("orientation") orientation: String = "portrait"
 	): List<ImageResponse>
 
 	@Headers("Authorization: Client-ID ${BuildConfig.UNSPLASH_API_KEY}")

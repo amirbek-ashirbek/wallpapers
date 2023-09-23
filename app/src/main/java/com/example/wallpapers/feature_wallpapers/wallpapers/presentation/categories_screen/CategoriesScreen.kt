@@ -52,7 +52,8 @@ fun CategoriesScreen(
 
 					if (category != null) {
 						CategoryItem(
-							category = category,
+							title = category.title,
+							coverPhotoUrl = category.coverPhotoUrl,
 							onItemClicked = {
 								navController.navigate(WallpapersScreen.route + "/${category.id}")
 							}

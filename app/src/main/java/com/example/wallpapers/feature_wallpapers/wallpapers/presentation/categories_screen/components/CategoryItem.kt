@@ -17,11 +17,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
 
 @Composable
 fun CategoryItem(
-	category: WallpaperCategory,
+	title: String,
+	coverPhotoUrl: String,
 	onItemClicked: () -> Unit
 ) {
 	Box(
@@ -32,7 +32,7 @@ fun CategoryItem(
 			)
 	) {
 		AsyncImage(
-			model = category.coverPhotoUrl,
+			model = coverPhotoUrl,
 			contentDescription = null,
 			contentScale = ContentScale.Crop,
 			modifier = Modifier
@@ -40,7 +40,7 @@ fun CategoryItem(
 				.aspectRatio(5f/2f)
 		)
 		Text(
-			text = category.title,
+			text = title,
 			color = Color.White,
 			fontWeight = FontWeight.Bold,
 			fontSize = 16.sp,
