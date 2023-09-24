@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.Downloader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,6 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WallpapersViewModel @Inject constructor(
 	private val wallpaperRepository: WallpaperRepository,
+	private val downloader: Downloader,
 	savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -41,6 +43,11 @@ class WallpapersViewModel @Inject constructor(
 						isWallpaperVisibleInFullScreen = false,
 						wallpaperInFullScreen = null
 					)
+				}
+			}
+			is WallpapersEvent.DownloadClicked -> {
+				_uiState.value.wallpaperInFullScreen?.downloadUrl?.let {
+					downloader.downloadFile(url = it)
 				}
 			}
 		}

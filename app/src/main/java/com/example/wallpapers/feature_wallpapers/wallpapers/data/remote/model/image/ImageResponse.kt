@@ -38,7 +38,8 @@ data class ImageResponse(
             return WallpaperEntity(
                 id = imageResponse.id,
                 categoryId = categoryId,
-                url = imageResponse.urls.regular
+                url = imageResponse.urls.regular,
+                downloadUrl = imageResponse.links.download
             )
         }
     }

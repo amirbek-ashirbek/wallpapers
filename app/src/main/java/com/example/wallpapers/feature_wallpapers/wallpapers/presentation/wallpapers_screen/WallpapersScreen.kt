@@ -46,7 +46,8 @@ fun WallpapersScreen(
 			WallpaperDialog(
 				url = url,
 				onDismiss = { onWallpapersEvent(WallpapersEvent.WallpaperDismissed) },
-				onButtonClicked = { testDialogIsVisible.value = true }
+				onButtonClicked = { testDialogIsVisible.value = true },
+				onDownloadClicked = { onWallpapersEvent(WallpapersEvent.DownloadClicked(uiState.wallpaperInFullScreen)) }
 			)
 		}
 	}
