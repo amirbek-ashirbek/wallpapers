@@ -15,7 +15,7 @@ import coil.compose.AsyncImage
 @Composable
 fun WallpaperDialog(
 	url: String,
-	onButtonClicked: () -> Unit,
+	onApplyClicked: () -> Unit,
 	onDownloadClicked: () -> Unit,
 	onDismiss: () -> Unit
 ) {
@@ -39,6 +39,7 @@ fun WallpaperDialog(
 				)
 				WallpaperActionsRow(
 					onDownloadClicked = onDownloadClicked,
+					onApplyClicked = onApplyClicked,
 					modifier = Modifier
 						.align(Alignment.BottomCenter)
 						.padding(bottom = 16.dp)

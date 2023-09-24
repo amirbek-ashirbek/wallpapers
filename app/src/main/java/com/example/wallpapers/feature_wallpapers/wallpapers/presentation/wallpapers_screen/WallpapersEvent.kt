@@ -5,5 +5,6 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpap
 sealed class WallpapersEvent {
 	data class WallpaperClicked(val wallpaper: Wallpaper) : WallpapersEvent()
 	data class DownloadClicked(val wallpaper: Wallpaper) : WallpapersEvent()
+	data class ApplyClicked(val wallpaper: Wallpaper) : WallpapersEvent()
 	data object WallpaperDismissed : WallpapersEvent()
 }

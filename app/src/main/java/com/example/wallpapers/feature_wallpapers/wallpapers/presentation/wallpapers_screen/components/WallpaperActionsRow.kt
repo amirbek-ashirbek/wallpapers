@@ -21,6 +21,7 @@ import com.example.wallpapers.R
 @Composable
 fun WallpaperActionsRow(
 	onDownloadClicked: () -> Unit,
+	onApplyClicked: () -> Unit,
 	modifier: Modifier = Modifier
 ) {
 	Row(
@@ -36,7 +37,7 @@ fun WallpaperActionsRow(
 		ActionItem(
 			imageResId = R.drawable.icon_apply,
 			title = "Apply",
-			onClick = {  }
+			onClick = onApplyClicked
 		)
 		Spacer(modifier = Modifier.width(64.dp))
 		ActionItem(

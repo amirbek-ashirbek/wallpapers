@@ -114,6 +114,7 @@ dependencies {
 	implementation("androidx.room:room-paging:$room_version")
 
 	// Coil
+	implementation("io.coil-kt:coil-base:2.4.0")
 	implementation("io.coil-kt:coil-compose:2.4.0")
 
 	// Chucker
