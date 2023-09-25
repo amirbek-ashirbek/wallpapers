@@ -7,5 +7,6 @@ data class WallpapersState(
 	val wallpaperInFullScreen: Wallpaper? = null,
 	val isApplyDialogVisible: Boolean = false,
 	val wallpaperAppliedSuccessfully: Boolean = false,
-	val isWallpaperApplying: Boolean = false
+	val isWallpaperApplying: Boolean = false,
+	val downloadError: Boolean = false
 )

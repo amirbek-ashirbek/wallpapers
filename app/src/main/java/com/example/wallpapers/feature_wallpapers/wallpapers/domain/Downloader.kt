@@ -2,6 +2,6 @@ package com.example.wallpapers.feature_wallpapers.wallpapers.domain
 
 interface Downloader {
 
-	fun downloadFile(url: String): Long
+	fun downloadFile(url: String, id: String): Long
 
 }

@@ -1,11 +1,12 @@
 package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.WallpaperRepository
-import com.example.wallpapers.feature_wallpapers.wallpapers.domain.Downloader
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.use_case.DownloadWallpaperUseCase
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperApplyScreen
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperSetter
 import com.example.wallpapers.util.Result
@@ -19,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WallpapersViewModel @Inject constructor(
 	private val wallpaperRepository: WallpaperRepository,
-	private val downloader: Downloader,
+	private val downloadWallpaperUseCase: DownloadWallpaperUseCase,
 	private val wallpaperSetter: WallpaperSetter,
 	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -51,8 +52,8 @@ class WallpapersViewModel @Inject constructor(
 				}
 			}
 			is WallpapersEvent.DownloadClicked -> {
-				_uiState.value.wallpaperInFullScreen?.downloadUrl?.let {
-					downloadWallpaper(url = it)
+				_uiState.value.wallpaperInFullScreen?.let { wallpaper ->
+					downloadWallpaper(url = wallpaper.url, wallpaperId = wallpaper.id)
 				}
 			}
 			is WallpapersEvent.ApplyButtonClicked -> {
@@ -95,8 +96,19 @@ class WallpapersViewModel @Inject constructor(
 		}
 	}
 
-	private fun downloadWallpaper(url: String) {
-		downloader.downloadFile(url = url)
+	// TODO function needs improving (loading and error handling)
+	private fun downloadWallpaper(url: String, wallpaperId: String) {
+		val downloadId = downloadWallpaperUseCase.execute(
+			url = url,
+			wallpaperId = wallpaperId
+		)
+		if (downloadId == -1L) {
+			Log.d("WallpaperDownload", "erroor")
+			_uiState.update { it.copy(downloadError = true) }
+		} else {
+			Log.d("WallpaperDownload", "it's okay")
+			_uiState.update { it.copy(downloadError = false) }
+		}
 	}
 
 }
