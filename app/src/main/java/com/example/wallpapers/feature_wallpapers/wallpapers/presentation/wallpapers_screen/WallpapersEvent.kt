@@ -7,4 +7,5 @@ sealed class WallpapersEvent {
 	data class DownloadClicked(val wallpaper: Wallpaper) : WallpapersEvent()
 	data class ApplyClicked(val wallpaper: Wallpaper) : WallpapersEvent()
 	data object WallpaperDismissed : WallpapersEvent()
+	data object ApplyDialogDismissed: WallpapersEvent()
 }

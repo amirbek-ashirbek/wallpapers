@@ -20,11 +20,11 @@ class WallpaperSetter @Inject constructor(
 	suspend fun setWallpaper(url: String) {
 
 		try {
-//			val whichScreen = if (homeScreen) WallpaperManager.FLAG_SYSTEM else WallpaperManager.FLAG_LOCK
 			val wallpaperBitmap = getBitmap(url = url)
-			wallpaperManager.setBitmap(wallpaperBitmap)
-			Toast.makeText(context, "Wallpaper set", Toast.LENGTH_LONG).show()
+			wallpaperManager.setBitmap(wallpaperBitmap, null, true, WallpaperManager.FLAG_SYSTEM)
+			Toast.makeText(context, "Wallpaper set.", Toast.LENGTH_LONG).show()
 		} catch (e: Exception) {
+			Toast.makeText(context, "An error occurred.", Toast.LENGTH_LONG).show()
 			Log.e("WallpaperSetter", e.message ?: "An error occurred while setting a wallpaper.")
 		}
 	}

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Wallpapers</string>
+
+    <string name="home_screen">Home screen</string>
+    <string name="lock_screen">Lock screen</string>
+    <string name="home_and_lock_screens">Home and lock screens</string>
 </resources>

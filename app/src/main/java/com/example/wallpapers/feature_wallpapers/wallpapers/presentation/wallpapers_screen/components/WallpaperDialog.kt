@@ -5,12 +5,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil.compose.AsyncImage
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.GradientOverlay
 
 @Composable
 fun WallpaperDialog(
@@ -19,6 +24,9 @@ fun WallpaperDialog(
 	onDownloadClicked: () -> Unit,
 	onDismiss: () -> Unit
 ) {
+
+	val actionsRowHeight = remember { mutableIntStateOf(0) }
+
 	Dialog(
 		onDismissRequest = onDismiss,
 		properties = DialogProperties(
@@ -32,10 +40,16 @@ fun WallpaperDialog(
 			Box(modifier = Modifier.fillMaxSize()) {
 				AsyncImage(
 					model = url,
-//					contentScale = ContentScale.FillBounds,
+					contentScale = ContentScale.Crop,
 					contentDescription = "",
 					modifier = Modifier
 						.fillMaxSize()
+				)
+				GradientOverlay(
+					height = actionsRowHeight.intValue.dp,
+					alpha = 0.3f,
+					modifier = Modifier
+						.align(Alignment.BottomCenter)
 				)
 				WallpaperActionsRow(
 					onDownloadClicked = onDownloadClicked,
@@ -43,6 +57,9 @@ fun WallpaperDialog(
 					modifier = Modifier
 						.align(Alignment.BottomCenter)
 						.padding(bottom = 16.dp)
+						.onGloballyPositioned { coordinates ->
+							actionsRowHeight.intValue = coordinates.size.height
+						}
 				)
 			}
 		}

@@ -50,14 +50,17 @@ class WallpapersViewModel @Inject constructor(
 			}
 			is WallpapersEvent.DownloadClicked -> {
 				_uiState.value.wallpaperInFullScreen?.downloadUrl?.let {
-					downloader.downloadFile(url = it)
+					downloadWallpaper(url = it)
 				}
 			}
 			is WallpapersEvent.ApplyClicked -> {
-				_uiState.value.wallpaperInFullScreen?.url?.let {
-					setWallpaper(url = it)
-				}
-
+//				_uiState.value.wallpaperInFullScreen?.url?.let {
+//					setWallpaper(url = it)
+//				}
+				_uiState.update { it.copy(isApplyDialogVisible = true) }
+			}
+			is WallpapersEvent.ApplyDialogDismissed -> {
+				_uiState.update { it.copy(isApplyDialogVisible = false) }
 			}
 		}
 	}
@@ -66,6 +69,10 @@ class WallpapersViewModel @Inject constructor(
 		viewModelScope.launch {
 			wallpaperSetter.setWallpaper(url = url)
 		}
+	}
+
+	private fun downloadWallpaper(url: String) {
+		downloader.downloadFile(url = url)
 	}
 
 }

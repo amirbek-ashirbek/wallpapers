@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.ApplyDialog
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.WallpaperDialog
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.WallpapersGrid
 
@@ -21,6 +22,7 @@ fun WallpapersScreen(
 
 	val isWallpaperVisibleInFullScreen: Boolean = uiState.isWallpaperVisibleInFullScreen
 	val wallpaperInFullScreen: Wallpaper? = uiState.wallpaperInFullScreen
+	val isApplyDialogVisible: Boolean = uiState.isApplyDialogVisible
 
 	AnimatedVisibility(
 		visible = isWallpaperVisibleInFullScreen,
@@ -35,6 +37,12 @@ fun WallpapersScreen(
 				onDownloadClicked = { onWallpapersEvent(WallpapersEvent.DownloadClicked(wallpaper = wallpaper)) }
 			)
 		}
+	}
+	
+	if (isApplyDialogVisible) {
+		ApplyDialog(
+			onDismissRequest = { onWallpapersEvent(WallpapersEvent.ApplyDialogDismissed) }
+		)
 	}
 
 	Surface(
