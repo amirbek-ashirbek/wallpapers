@@ -18,9 +18,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.wallpapers.R
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperApplyScreen
 
 @Composable
 fun ApplyDialog(
+	onApply: (WallpaperApplyScreen) -> Unit,
 	onDismissRequest: () -> Unit
 ) {
 	Dialog(onDismissRequest = onDismissRequest) {
@@ -47,19 +49,19 @@ fun ApplyDialog(
 				)
 				Spacer(modifier = Modifier.height(24.dp))
 				ApplyButton(
-					onClick = { /*TODO*/ },
+					onClick = { onApply(WallpaperApplyScreen.HOME_SCREEN) },
 					text = stringResource(id = R.string.home_screen),
 					modifier = Modifier.fillMaxWidth()
 				)
 				Spacer(modifier = Modifier.height(4.dp))
 				ApplyButton(
-					onClick = { /*TODO*/ },
+					onClick = { onApply(WallpaperApplyScreen.LOCK_SCREEN) },
 					text = stringResource(id = R.string.lock_screen),
 					modifier = Modifier.fillMaxWidth()
 				)
 				Spacer(modifier = Modifier.height(4.dp))
 				ApplyButton(
-					onClick = { /*TODO*/ },
+					onClick = { onApply(WallpaperApplyScreen.HOME_AND_LOCK_SCREENS) },
 					text = stringResource(id = R.string.home_and_lock_screens),
 					modifier = Modifier.fillMaxWidth()
 				)

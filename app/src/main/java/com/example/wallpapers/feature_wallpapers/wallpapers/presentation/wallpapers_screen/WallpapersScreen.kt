@@ -33,7 +33,7 @@ fun WallpapersScreen(
 			WallpaperDialog(
 				url = wallpaper.url,
 				onDismiss = { onWallpapersEvent(WallpapersEvent.WallpaperDismissed) },
-				onApplyClicked = { onWallpapersEvent(WallpapersEvent.ApplyClicked(wallpaper = wallpaper)) },
+				onApplyClicked = { onWallpapersEvent(WallpapersEvent.ApplyButtonClicked(wallpaper = wallpaper)) },
 				onDownloadClicked = { onWallpapersEvent(WallpapersEvent.DownloadClicked(wallpaper = wallpaper)) }
 			)
 		}
@@ -41,6 +41,9 @@ fun WallpapersScreen(
 	
 	if (isApplyDialogVisible) {
 		ApplyDialog(
+			onApply = { screen ->
+				onWallpapersEvent(WallpapersEvent.WallpaperApplied(screen = screen))
+			},
 			onDismissRequest = { onWallpapersEvent(WallpapersEvent.ApplyDialogDismissed) }
 		)
 	}
