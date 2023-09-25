@@ -8,6 +8,7 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.Wall
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.Downloader
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperApplyScreen
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperSetter
+import com.example.wallpapers.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -73,8 +74,24 @@ class WallpapersViewModel @Inject constructor(
 	}
 
 	private fun setWallpaper(url: String, screen: WallpaperApplyScreen) {
+		_uiState.update { it.copy(isWallpaperApplying = true) }
 		viewModelScope.launch {
-			wallpaperSetter.setWallpaper(url = url, screen = screen)
+			val result = wallpaperSetter.setWallpaper(url = url, screen = screen)
+			when (result) {
+				is Result.Success -> {
+					_uiState.update { it.copy(
+						wallpaperAppliedSuccessfully = true,
+						isWallpaperApplying = false,
+						isApplyDialogVisible = false
+					) }
+				}
+				is Result.Failure -> {
+					_uiState.update { it.copy(
+						wallpaperAppliedSuccessfully = false,
+						isWallpaperApplying = false
+					) }
+				}
+			}
 		}
 	}
 

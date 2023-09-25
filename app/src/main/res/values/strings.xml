@@ -4,4 +4,6 @@
     <string name="home_screen">Home screen</string>
     <string name="lock_screen">Lock screen</string>
     <string name="home_and_lock_screens">Home and lock screens</string>
+    <string name="wallpaper_set_successfully">Wallpaper set successfully</string>
+    <string name="error_occurred">An error occurred</string>
 </resources>

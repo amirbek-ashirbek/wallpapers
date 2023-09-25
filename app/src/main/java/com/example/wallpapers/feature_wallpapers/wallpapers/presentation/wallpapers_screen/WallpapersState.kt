@@ -5,5 +5,7 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpap
 data class WallpapersState(
 	val isWallpaperVisibleInFullScreen: Boolean = false,
 	val wallpaperInFullScreen: Wallpaper? = null,
-	val isApplyDialogVisible: Boolean = false
+	val isApplyDialogVisible: Boolean = false,
+	val wallpaperAppliedSuccessfully: Boolean = false,
+	val isWallpaperApplying: Boolean = false
 )
