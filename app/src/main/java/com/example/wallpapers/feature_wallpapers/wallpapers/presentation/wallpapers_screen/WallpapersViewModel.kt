@@ -1,6 +1,5 @@
 package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -110,19 +109,21 @@ class WallpapersViewModel @Inject constructor(
 	}
 
 	private fun downloadWallpaper(url: String, wallpaperId: String) {
+		_uiState.update { it.copy(isDownloading = true) }
+
 		viewModelScope.launch {
 			val result = downloadWallpaperUseCase.execute(url = url, wallpaperId = wallpaperId)
 			when (result) {
 				is DownloadResult.Success -> {
-					Log.d("DownloadWallpaper", "Success! ${result.downloadId}")
+					_uiState.update { it.copy(isDownloading = false) }
 				}
 
 				is DownloadResult.InternetError -> {
-					_uiState.update { it.copy(internetError = true) }
+					_uiState.update { it.copy(internetError = true, isDownloading = false) }
 				}
 
 				is DownloadResult.OtherError -> {
-					Log.d("DownloadWallpaper", "An error happened!")
+					_uiState.update { it.copy(isDownloading = false) }
 				}
 			}
 		}
