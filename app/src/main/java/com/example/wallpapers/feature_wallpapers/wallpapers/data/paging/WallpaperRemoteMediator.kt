@@ -9,7 +9,7 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperEntity
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperRemoteKeys
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
-import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.image.ImageResponse
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.image.ImageResponse.Companion.toWallpaperEntity
 import okio.IOException
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -72,9 +72,12 @@ class WallpaperRemoteMediator @Inject constructor(
 				wallpaperRemoteKeysDao.addAllRemoteKeys(remoteKeys = keys)
 
 				val wallpapers = response.map { imageResponse ->
-					ImageResponse.toWallpaperEntity(
+					val existingWallpaper = wallpaperDao.getWallpaperById(imageResponse.id)
+					val isFavourite = existingWallpaper?.isFavourite ?: false
+					toWallpaperEntity(
 						imageResponse = imageResponse,
-						categoryId = categoryId
+						categoryId = categoryId,
+						isFavourite = isFavourite
 					)
 				}
 				wallpaperDao.upsertAll(wallpapers = wallpapers)

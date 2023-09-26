@@ -15,13 +15,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil.compose.AsyncImage
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.GradientOverlay
 
 @Composable
 fun WallpaperDialog(
-	url: String,
+	wallpaper: Wallpaper,
 	onApplyClicked: () -> Unit,
 	onDownloadClicked: () -> Unit,
+	onFavouriteClicked: () -> Unit,
 	onDismiss: () -> Unit
 ) {
 
@@ -39,7 +41,7 @@ fun WallpaperDialog(
 		) {
 			Box(modifier = Modifier.fillMaxSize()) {
 				AsyncImage(
-					model = url,
+					model = wallpaper.url,
 					contentScale = ContentScale.Crop,
 					contentDescription = "",
 					modifier = Modifier
@@ -54,6 +56,8 @@ fun WallpaperDialog(
 				WallpaperActionsRow(
 					onDownloadClicked = onDownloadClicked,
 					onApplyClicked = onApplyClicked,
+					onFavouriteClicked = onFavouriteClicked,
+					isFavourite = wallpaper.isFavourite,
 					modifier = Modifier
 						.align(Alignment.BottomCenter)
 						.padding(bottom = 16.dp)

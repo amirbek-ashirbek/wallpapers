@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.WallpaperDatabase
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.WallpaperRepository
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.use_case.DownloadWallpaperUseCase
@@ -25,6 +26,7 @@ class WallpapersViewModel @Inject constructor(
 	private val downloadWallpaperUseCase: DownloadWallpaperUseCase,
 	private val updateWallpaperIsFavouriteUseCase: UpdateWallpaperIsFavouriteUseCase,
 	private val wallpaperSetter: WallpaperSetter,
+	private val wallpaperDatabase: WallpaperDatabase,
 	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -133,7 +135,8 @@ class WallpapersViewModel @Inject constructor(
 
 	private fun updateWallpaperIsFavourite(wallpaper: Wallpaper) {
 		viewModelScope.launch {
-			updateWallpaperIsFavouriteUseCase.execute(wallpaper = wallpaper)
+			val updatedWallpaper = wallpaper.copy(isFavourite = !wallpaper.isFavourite)
+			updateWallpaperIsFavouriteUseCase.execute(wallpaper = updatedWallpaper)
 		}
 	}
 }

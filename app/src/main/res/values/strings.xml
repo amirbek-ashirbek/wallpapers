@@ -9,4 +9,6 @@
     <string name="no_internet">No internet connection</string>
     <string name="check_your_internet_connection">Please, check your internet connection and try again.</string>
     <string name="ok">OK</string>
+
+    <string name="favourite">Favourite</string>
 </resources>

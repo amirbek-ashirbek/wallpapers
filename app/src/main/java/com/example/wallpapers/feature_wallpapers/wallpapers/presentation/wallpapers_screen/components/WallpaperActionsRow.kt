@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.wallpapers.R
@@ -21,6 +22,8 @@ import com.example.wallpapers.R
 fun WallpaperActionsRow(
 	onDownloadClicked: () -> Unit,
 	onApplyClicked: () -> Unit,
+	onFavouriteClicked: () -> Unit,
+	isFavourite: Boolean,
 	modifier: Modifier = Modifier
 ) {
 	Row(
@@ -40,9 +43,9 @@ fun WallpaperActionsRow(
 		)
 		Spacer(modifier = Modifier.width(64.dp))
 		ActionItem(
-			imageResId = R.drawable.icon_heart_empty,
-			title = "Favourites",
-			onClick = {  }
+			imageResId = if (isFavourite) R.drawable.ic_launcher_foreground else R.drawable.icon_heart_empty,
+			title = stringResource(id = R.string.favourite),
+			onClick = onFavouriteClicked
 		)
 	}
 }

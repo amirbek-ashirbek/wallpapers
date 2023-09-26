@@ -9,8 +9,7 @@ class UpdateWallpaperIsFavouriteUseCase @Inject constructor(
 ) {
 
 	suspend fun execute(wallpaper: Wallpaper) {
-		val updatedWallpaper = wallpaper.copy(isFavourite = !wallpaper.isFavourite)
-		wallpaperRepository.updateWallpaper(wallpaper = updatedWallpaper)
+		wallpaperRepository.updateWallpaper(wallpaper = wallpaper)
 	}
 
 }

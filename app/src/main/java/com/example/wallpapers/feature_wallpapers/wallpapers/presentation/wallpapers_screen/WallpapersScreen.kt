@@ -40,10 +40,11 @@ fun WallpapersScreen(
 	) {
 		wallpaperInFullScreen?.let { wallpaper ->
 			WallpaperDialog(
-				url = wallpaper.url,
+				wallpaper = wallpaper,
 				onDismiss = { onWallpapersEvent(WallpapersEvent.WallpaperDismissed) },
 				onApplyClicked = { onWallpapersEvent(WallpapersEvent.ApplyButtonClicked(wallpaper = wallpaper)) },
-				onDownloadClicked = { onWallpapersEvent(WallpapersEvent.DownloadClicked(wallpaper = wallpaper)) }
+				onDownloadClicked = { onWallpapersEvent(WallpapersEvent.DownloadClicked(wallpaper = wallpaper)) },
+				onFavouriteClicked = { onWallpapersEvent(WallpapersEvent.FavouriteClicked(wallpaper = wallpaper)) },
 			)
 		}
 	}

@@ -16,13 +16,16 @@ interface WallpaperDao {
 	@Query("SELECT * FROM wallpapers WHERE categoryId =:categoryId")
 	fun pagingSource(categoryId: String): PagingSource<Int, WallpaperEntity>
 
-	@Query("DELETE FROM  wallpapers WHERE categoryId =:categoryId")
+	@Query("DELETE FROM  wallpapers WHERE categoryId =:categoryId AND isFavourite = 0")
 	suspend fun clearAll(categoryId: String)
 
 	@Query("SELECT * FROM wallpapers WHERE isFavourite = 1")
-	suspend fun getFavouriteWallpapers(): PagingSource<Int, WallpaperEntity>
+	fun getFavouriteWallpapers(): PagingSource<Int, WallpaperEntity>
 
 	@Update
 	suspend fun updateWallpaper(wallpaperEntity: WallpaperEntity)
+
+	@Query("SELECT * FROM wallpapers WHERE id =:id")
+	suspend fun getWallpaperById(id: String): WallpaperEntity?
 
 }
