@@ -3,6 +3,7 @@ package com.example.wallpapers.di
 import android.app.DownloadManager
 import android.app.WallpaperManager
 import android.content.Context
+import android.net.ConnectivityManager
 import coil.ImageLoader
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.DownloaderImpl
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.WallpaperDatabase
@@ -35,8 +36,8 @@ object WallpapersModule {
 
 	@Singleton
 	@Provides
-	fun provideDownloader(downloadManager: DownloadManager): Downloader {
-		return DownloaderImpl(downloadManager = downloadManager)
+	fun provideDownloader(downloadManager: DownloadManager, connectivityManager: ConnectivityManager): Downloader {
+		return DownloaderImpl(downloadManager = downloadManager, connectivityManager = connectivityManager)
 	}
 
 	@Singleton

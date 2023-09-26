@@ -9,6 +9,7 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.Wall
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.use_case.DownloadWallpaperUseCase
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperApplyScreen
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperSetter
+import com.example.wallpapers.util.DownloadResult
 import com.example.wallpapers.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,6 +44,7 @@ class WallpapersViewModel @Inject constructor(
 					)
 				}
 			}
+
 			is WallpapersEvent.WallpaperDismissed -> {
 				_uiState.update {
 					it.copy(
@@ -51,15 +53,18 @@ class WallpapersViewModel @Inject constructor(
 					)
 				}
 			}
+
 			is WallpapersEvent.DownloadClicked -> {
 				_uiState.value.wallpaperInFullScreen?.let { wallpaper ->
 					downloadWallpaper(url = wallpaper.url, wallpaperId = wallpaper.id)
 				}
 			}
+
 			is WallpapersEvent.ApplyButtonClicked -> {
 				_uiState.update { it.copy(isApplyDialogVisible = true) }
 
 			}
+
 			is WallpapersEvent.WallpaperApplied -> {
 				_uiState.value.wallpaperInFullScreen?.url?.let {
 					setWallpaper(
@@ -68,6 +73,7 @@ class WallpapersViewModel @Inject constructor(
 					)
 				}
 			}
+
 			is WallpapersEvent.ApplyDialogDismissed -> {
 				_uiState.update { it.copy(isApplyDialogVisible = false) }
 			}
@@ -80,35 +86,43 @@ class WallpapersViewModel @Inject constructor(
 			val result = wallpaperSetter.setWallpaper(url = url, screen = screen)
 			when (result) {
 				is Result.Success -> {
-					_uiState.update { it.copy(
-						wallpaperAppliedSuccessfully = true,
-						isWallpaperApplying = false,
-						isApplyDialogVisible = false
-					) }
+					_uiState.update {
+						it.copy(
+							wallpaperAppliedSuccessfully = true,
+							isWallpaperApplying = false,
+							isApplyDialogVisible = false
+						)
+					}
 				}
+
 				is Result.Failure -> {
-					_uiState.update { it.copy(
-						wallpaperAppliedSuccessfully = false,
-						isWallpaperApplying = false
-					) }
+					_uiState.update {
+						it.copy(
+							wallpaperAppliedSuccessfully = false,
+							isWallpaperApplying = false
+						)
+					}
 				}
 			}
 		}
 	}
 
-	// TODO function needs improving (loading and error handling)
 	private fun downloadWallpaper(url: String, wallpaperId: String) {
-		val downloadId = downloadWallpaperUseCase.execute(
-			url = url,
-			wallpaperId = wallpaperId
-		)
-		if (downloadId == -1L) {
-			Log.d("WallpaperDownload", "erroor")
-			_uiState.update { it.copy(downloadError = true) }
-		} else {
-			Log.d("WallpaperDownload", "it's okay")
-			_uiState.update { it.copy(downloadError = false) }
+		viewModelScope.launch {
+			val result = downloadWallpaperUseCase.execute(url = url, wallpaperId = wallpaperId)
+			when (result) {
+				is DownloadResult.Success -> {
+					Log.d("DownloadWallpaper", "Success! ${result.downloadId}")
+				}
+
+				is DownloadResult.InternetError -> {
+					Log.d("DownloadWallpaper", "There is no internet man")
+				}
+
+				is DownloadResult.OtherError -> {
+					Log.d("DownloadWallpaper", "An error happened!")
+				}
+			}
 		}
 	}
-
 }

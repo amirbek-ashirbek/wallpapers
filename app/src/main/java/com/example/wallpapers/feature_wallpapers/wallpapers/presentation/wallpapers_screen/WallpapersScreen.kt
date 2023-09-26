@@ -4,12 +4,16 @@ import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.shrinkOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.window.Dialog
 import androidx.paging.compose.LazyPagingItems
 import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
@@ -61,6 +65,14 @@ fun WallpapersScreen(
 				context.getString(R.string.wallpaper_set_successfully),
 				Toast.LENGTH_SHORT
 			).show()
+		}
+	}
+
+	if (uiState.downloadError) {
+		Dialog(
+			onDismissRequest = {}
+		) {
+			Box(modifier = Modifier.fillMaxSize().background(color = Color.Yellow))
 		}
 	}
 

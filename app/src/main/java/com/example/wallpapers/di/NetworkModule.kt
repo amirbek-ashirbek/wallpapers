@@ -1,6 +1,7 @@
 package com.example.wallpapers.di
 
 import android.content.Context
+import android.net.ConnectivityManager
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
 import com.example.wallpapers.util.Constants.UNSPLASH_BASE_URL
@@ -40,6 +41,12 @@ object NetworkModule {
 		return OkHttpClient.Builder()
 			.addInterceptor(ChuckerInterceptor(context = context))
 			.build()
+	}
+
+	@Provides
+	@Singleton
+	fun provideConnectivityManager(@ApplicationContext context: Context): ConnectivityManager {
+		return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 	}
 
 }
