@@ -8,8 +8,9 @@ import coil.ImageLoader
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.DownloaderImpl
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.WallpaperDatabase
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
-import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.WallpaperRepositoryImpl
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.Downloader
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.WallpaperRepository
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperSetter
 import dagger.Module
 import dagger.Provides
@@ -28,7 +29,7 @@ object WallpapersModule {
 		unsplashApi: UnsplashApi,
 		wallpaperDatabase: WallpaperDatabase,
 	): WallpaperRepository {
-		return WallpaperRepository(
+		return WallpaperRepositoryImpl(
 			unsplashApi = unsplashApi,
 			wallpaperDatabase = wallpaperDatabase,
 		)

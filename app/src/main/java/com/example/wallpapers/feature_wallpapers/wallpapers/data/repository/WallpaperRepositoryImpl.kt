@@ -8,9 +8,11 @@ import androidx.paging.map
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.WallpaperDatabase
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperCategoryEntity.Companion.toWallpaperCategory
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperEntity.Companion.toWallpaper
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperEntity.Companion.toWallpaperEntity
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.paging.WallpaperCategoryRemoteMediator
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.paging.WallpaperRemoteMediator
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.WallpaperRepository
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
 import com.example.wallpapers.util.Constants
@@ -19,12 +21,12 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class WallpaperRepository @Inject constructor(
+class WallpaperRepositoryImpl @Inject constructor(
 	private val unsplashApi: UnsplashApi,
-	private val wallpaperDatabase: WallpaperDatabase
-) {
+	private val wallpaperDatabase: WallpaperDatabase,
+) : WallpaperRepository {
 
-	fun getWallpapersByCategory(categoryId: String): Flow<PagingData<Wallpaper>> {
+	override fun getWallpapersByCategory(categoryId: String): Flow<PagingData<Wallpaper>> {
 
 		val pager = Pager(
 			config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),
@@ -45,7 +47,12 @@ class WallpaperRepository @Inject constructor(
 		}
 	}
 
-	fun getAllWallpaperCategories(): Flow<PagingData<WallpaperCategory>> {
+	override suspend fun updateWallpaper(wallpaper: Wallpaper) {
+		val wallpaperEntity = toWallpaperEntity(wallpaper = wallpaper)
+		wallpaperDatabase.wallpaperDao().updateWallpaper(wallpaperEntity = wallpaperEntity)
+	}
+
+	override fun getAllWallpaperCategories(): Flow<PagingData<WallpaperCategory>> {
 
 		val pager = Pager(
 			config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),

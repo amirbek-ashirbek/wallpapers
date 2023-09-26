@@ -8,6 +8,7 @@ sealed class WallpapersEvent {
 	data class DownloadClicked(val wallpaper: Wallpaper) : WallpapersEvent()
 	data class ApplyButtonClicked(val wallpaper: Wallpaper) : WallpapersEvent()
 	data class WallpaperApplied(val screen: WallpaperApplyScreen) : WallpapersEvent()
+	data class FavouriteClicked(val wallpaper: Wallpaper) : WallpapersEvent()
 	data object WallpaperDismissed : WallpapersEvent()
 	data object ApplyDialogDismissed: WallpapersEvent()
 	data object InternetErrorDialogDismissed: WallpapersEvent()

@@ -4,8 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.example.wallpapers.feature_wallpapers.wallpapers.data.repository.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.use_case.DownloadWallpaperUseCase
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.use_case.UpdateWallpaperIsFavouriteUseCase
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperApplyScreen
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.WallpaperSetter
 import com.example.wallpapers.util.DownloadResult
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class WallpapersViewModel @Inject constructor(
 	private val wallpaperRepository: WallpaperRepository,
 	private val downloadWallpaperUseCase: DownloadWallpaperUseCase,
+	private val updateWallpaperIsFavouriteUseCase: UpdateWallpaperIsFavouriteUseCase,
 	private val wallpaperSetter: WallpaperSetter,
 	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -43,7 +46,6 @@ class WallpapersViewModel @Inject constructor(
 					)
 				}
 			}
-
 			is WallpapersEvent.WallpaperDismissed -> {
 				_uiState.update {
 					it.copy(
@@ -52,18 +54,15 @@ class WallpapersViewModel @Inject constructor(
 					)
 				}
 			}
-
 			is WallpapersEvent.DownloadClicked -> {
 				_uiState.value.wallpaperInFullScreen?.let { wallpaper ->
 					downloadWallpaper(url = wallpaper.url, wallpaperId = wallpaper.id)
 				}
 			}
-
 			is WallpapersEvent.ApplyButtonClicked -> {
 				_uiState.update { it.copy(isApplyDialogVisible = true) }
 
 			}
-
 			is WallpapersEvent.WallpaperApplied -> {
 				_uiState.value.wallpaperInFullScreen?.url?.let {
 					setWallpaper(
@@ -77,6 +76,9 @@ class WallpapersViewModel @Inject constructor(
 			}
 			is WallpapersEvent.InternetErrorDialogDismissed -> {
 				_uiState.update { it.copy(internetError = false) }
+			}
+			is WallpapersEvent.FavouriteClicked -> {
+				updateWallpaperIsFavourite(wallpaper = event.wallpaper)
 			}
 		}
 	}
@@ -126,6 +128,12 @@ class WallpapersViewModel @Inject constructor(
 					_uiState.update { it.copy(isDownloading = false) }
 				}
 			}
+		}
+	}
+
+	private fun updateWallpaperIsFavourite(wallpaper: Wallpaper) {
+		viewModelScope.launch {
+			updateWallpaperIsFavouriteUseCase.execute(wallpaper = wallpaper)
 		}
 	}
 }

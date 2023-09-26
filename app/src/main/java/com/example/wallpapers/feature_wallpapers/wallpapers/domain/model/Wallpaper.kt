@@ -4,5 +4,6 @@ data class Wallpaper(
 	val id: String,
 	val categoryId: String,
 	val url: String,
-	val downloadUrl: String
+	val downloadUrl: String,
+	val isFavourite: Boolean
 )
