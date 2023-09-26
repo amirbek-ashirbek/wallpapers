@@ -28,6 +28,8 @@ fun WallpapersScreen(
 	val isWallpaperVisibleInFullScreen: Boolean = uiState.isWallpaperVisibleInFullScreen
 	val wallpaperInFullScreen: Wallpaper? = uiState.wallpaperInFullScreen
 	val isApplyDialogVisible: Boolean = uiState.isApplyDialogVisible
+	val wallpaperAppliedSuccessfully: Boolean = uiState.wallpaperAppliedSuccessfully
+	val internetError: Boolean = uiState.internetError
 
 	val context = LocalContext.current
 
@@ -56,7 +58,7 @@ fun WallpapersScreen(
 	}
 
 	LaunchedEffect(context) {
-		if (uiState.wallpaperAppliedSuccessfully) {
+		if (wallpaperAppliedSuccessfully) {
 			Toast.makeText(
 				context,
 				context.getString(R.string.wallpaper_set_successfully),
@@ -65,7 +67,7 @@ fun WallpapersScreen(
 		}
 	}
 
-	if (uiState.internetError) {
+	if (internetError) {
 		InternetErrorDialog(
 			onDismissRequest = { onWallpapersEvent(WallpapersEvent.InternetErrorDialogDismissed) }
 		)
