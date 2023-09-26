@@ -73,9 +73,11 @@ class WallpapersViewModel @Inject constructor(
 					)
 				}
 			}
-
 			is WallpapersEvent.ApplyDialogDismissed -> {
 				_uiState.update { it.copy(isApplyDialogVisible = false) }
+			}
+			is WallpapersEvent.InternetErrorDialogDismissed -> {
+				_uiState.update { it.copy(internetError = false) }
 			}
 		}
 	}
@@ -116,7 +118,7 @@ class WallpapersViewModel @Inject constructor(
 				}
 
 				is DownloadResult.InternetError -> {
-					Log.d("DownloadWallpaper", "There is no internet man")
+					_uiState.update { it.copy(internetError = true) }
 				}
 
 				is DownloadResult.OtherError -> {

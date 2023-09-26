@@ -10,4 +10,5 @@ sealed class WallpapersEvent {
 	data class WallpaperApplied(val screen: WallpaperApplyScreen) : WallpapersEvent()
 	data object WallpaperDismissed : WallpapersEvent()
 	data object ApplyDialogDismissed: WallpapersEvent()
+	data object InternetErrorDialogDismissed: WallpapersEvent()
 }

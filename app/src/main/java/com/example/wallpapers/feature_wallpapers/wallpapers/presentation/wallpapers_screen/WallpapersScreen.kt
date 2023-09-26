@@ -4,20 +4,17 @@ import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.shrinkOut
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.window.Dialog
 import androidx.paging.compose.LazyPagingItems
 import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.ApplyDialog
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.InternetErrorDialog
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.WallpaperDialog
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.WallpapersGrid
 
@@ -68,12 +65,10 @@ fun WallpapersScreen(
 		}
 	}
 
-	if (uiState.downloadError) {
-		Dialog(
-			onDismissRequest = {}
-		) {
-			Box(modifier = Modifier.fillMaxSize().background(color = Color.Yellow))
-		}
+	if (uiState.internetError) {
+		InternetErrorDialog(
+			onDismissRequest = { onWallpapersEvent(WallpapersEvent.InternetErrorDialogDismissed) }
+		)
 	}
 
 	Surface(

@@ -8,5 +8,5 @@ data class WallpapersState(
 	val isApplyDialogVisible: Boolean = false,
 	val wallpaperAppliedSuccessfully: Boolean = false,
 	val isWallpaperApplying: Boolean = false,
-	val downloadError: Boolean = false
+	val internetError: Boolean = false
 )
