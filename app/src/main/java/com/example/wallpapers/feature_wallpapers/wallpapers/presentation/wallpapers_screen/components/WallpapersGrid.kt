@@ -35,6 +35,7 @@ fun WallpapersGrid(
 			if (wallpaper != null) {
 				WallpaperItem(
 					url = wallpaper.url,
+					isFavourite = wallpaper.isFavourite,
 					onItemClicked = { onWallpaperClicked(wallpaper) }
 				)
 			}

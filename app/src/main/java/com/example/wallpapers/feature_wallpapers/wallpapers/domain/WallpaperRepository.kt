@@ -11,6 +11,8 @@ interface WallpaperRepository {
 
 	fun getWallpapersByCategory(categoryId: String): Flow<PagingData<Wallpaper>>
 
+	fun getWallpaperById(wallpaperId: String): Flow<Wallpaper>
+
 	suspend fun updateWallpaper(wallpaper: Wallpaper)
 
 }

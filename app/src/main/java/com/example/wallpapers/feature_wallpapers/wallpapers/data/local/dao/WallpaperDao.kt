@@ -6,6 +6,7 @@ import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Upsert
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WallpaperDao {
@@ -26,6 +27,6 @@ interface WallpaperDao {
 	suspend fun updateWallpaper(wallpaperEntity: WallpaperEntity)
 
 	@Query("SELECT * FROM wallpapers WHERE id =:id")
-	suspend fun getWallpaperById(id: String): WallpaperEntity?
+	fun getWallpaperById(id: String): Flow<WallpaperEntity>
 
 }

@@ -47,6 +47,12 @@ class WallpaperRepositoryImpl @Inject constructor(
 		}
 	}
 
+	override fun getWallpaperById(wallpaperId: String): Flow<Wallpaper> {
+		return wallpaperDatabase.wallpaperDao().getWallpaperById(id = wallpaperId).map { wallpaperEntity ->
+			toWallpaper(wallpaperEntity = wallpaperEntity)
+		}
+	}
+
 	override suspend fun updateWallpaper(wallpaper: Wallpaper) {
 		val wallpaperEntity = toWallpaperEntity(wallpaper = wallpaper)
 		wallpaperDatabase.wallpaperDao().updateWallpaper(wallpaperEntity = wallpaperEntity)

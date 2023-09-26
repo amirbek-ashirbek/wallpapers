@@ -1,78 +1,54 @@
 package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen
 
-import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandIn
-import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
-import com.example.wallpapers.R
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.ApplyDialog
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.InternetErrorDialog
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.WallpaperDialog
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.SingleWallpaperScreenDestination
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.single_wallpaper_screen.SingleWallpaperScreenNavArgs
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.WallpapersGrid
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination(
+	navArgsDelegate = WallpapersScreenNavArgs::class
+)
 @Composable
 fun WallpapersScreen(
-	wallpapers: LazyPagingItems<Wallpaper>,
-	uiState: WallpapersState,
-	onWallpapersEvent: (WallpapersEvent) -> Unit
+	navigator: DestinationsNavigator
 ) {
 
-	val isWallpaperVisibleInFullScreen: Boolean = uiState.isWallpaperVisibleInFullScreen
-	val wallpaperInFullScreen: Wallpaper? = uiState.wallpaperInFullScreen
-	val isApplyDialogVisible: Boolean = uiState.isApplyDialogVisible
-	val wallpaperAppliedSuccessfully: Boolean = uiState.wallpaperAppliedSuccessfully
-	val internetError: Boolean = uiState.internetError
+	val wallpapersViewModel: WallpapersViewModel = hiltViewModel()
 
-	val context = LocalContext.current
-
-	AnimatedVisibility(
-		visible = isWallpaperVisibleInFullScreen,
-		enter = expandIn(),
-		exit = shrinkOut()
-	) {
-		wallpaperInFullScreen?.let { wallpaper ->
-			WallpaperDialog(
-				wallpaper = wallpaper,
-				onDismiss = { onWallpapersEvent(WallpapersEvent.WallpaperDismissed) },
-				onApplyClicked = { onWallpapersEvent(WallpapersEvent.ApplyButtonClicked(wallpaper = wallpaper)) },
-				onDownloadClicked = { onWallpapersEvent(WallpapersEvent.DownloadClicked(wallpaper = wallpaper)) },
-				onFavouriteClicked = { onWallpapersEvent(WallpapersEvent.FavouriteClicked(wallpaper = wallpaper)) },
+	WallpapersScreenContent(
+		wallpapers = wallpapersViewModel.wallpapers.collectAsLazyPagingItems(),
+		uiState = wallpapersViewModel.uiState.collectAsStateWithLifecycle().value,
+		onWallpaperClicked = { wallpaper ->
+			navigator.navigate(
+				SingleWallpaperScreenDestination(
+					navArgs = SingleWallpaperScreenNavArgs(
+						wallpaperId = wallpaper.id,
+						url = wallpaper.url,
+						isFavourite = wallpaper.isFavourite
+					)
+				)
 			)
 		}
-	}
-	
-	if (isApplyDialogVisible) {
-		ApplyDialog(
-			onApply = { screen ->
-				onWallpapersEvent(WallpapersEvent.WallpaperApplied(screen = screen))
-			},
-			onDismissRequest = { onWallpapersEvent(WallpapersEvent.ApplyDialogDismissed) }
-		)
-	}
+	)
 
-	LaunchedEffect(context) {
-		if (wallpaperAppliedSuccessfully) {
-			Toast.makeText(
-				context,
-				context.getString(R.string.wallpaper_set_successfully),
-				Toast.LENGTH_SHORT
-			).show()
-		}
-	}
+}
 
-	if (internetError) {
-		InternetErrorDialog(
-			onDismissRequest = { onWallpapersEvent(WallpapersEvent.InternetErrorDialogDismissed) }
-		)
-	}
+@Composable
+fun WallpapersScreenContent(
+	wallpapers: LazyPagingItems<Wallpaper>,
+	uiState: WallpapersState,
+	onWallpaperClicked: (Wallpaper) -> Unit
+) {
 
 	Surface(
 		modifier = Modifier
@@ -80,9 +56,7 @@ fun WallpapersScreen(
 	) {
 		WallpapersGrid(
 			wallpapers = wallpapers,
-			onWallpaperClicked = { wallpaper ->
-				onWallpapersEvent(WallpapersEvent.WallpaperClicked(wallpaper))
-			}
+			onWallpaperClicked = onWallpaperClicked
 		)
 	}
 

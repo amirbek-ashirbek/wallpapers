@@ -1,4 +1,4 @@
-package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components
+package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.single_wallpaper_screen.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

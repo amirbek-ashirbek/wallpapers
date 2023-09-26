@@ -1,10 +1,11 @@
-package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components
+package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.single_wallpaper_screen.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -43,7 +44,7 @@ fun WallpaperActionsRow(
 		)
 		Spacer(modifier = Modifier.width(64.dp))
 		ActionItem(
-			imageResId = if (isFavourite) R.drawable.ic_launcher_foreground else R.drawable.icon_heart_empty,
+			imageResId = if (isFavourite) R.drawable.icon_heart_full else R.drawable.icon_heart_empty,
 			title = stringResource(id = R.string.favourite),
 			onClick = onFavouriteClicked
 		)
@@ -66,6 +67,7 @@ fun ActionItem(
 			painter = painterResource(id = imageResId),
 			tint = Color.White,
 			contentDescription = null,
+			modifier = Modifier.size(32.dp)
 		)
 		Spacer(modifier = Modifier.height(4.dp))
 		Text(

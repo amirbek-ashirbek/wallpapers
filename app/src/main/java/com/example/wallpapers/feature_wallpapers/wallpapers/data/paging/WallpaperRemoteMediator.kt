@@ -10,6 +10,7 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.Wal
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperRemoteKeys
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.image.ImageResponse.Companion.toWallpaperEntity
+import kotlinx.coroutines.flow.firstOrNull
 import okio.IOException
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -72,7 +73,7 @@ class WallpaperRemoteMediator @Inject constructor(
 				wallpaperRemoteKeysDao.addAllRemoteKeys(remoteKeys = keys)
 
 				val wallpapers = response.map { imageResponse ->
-					val existingWallpaper = wallpaperDao.getWallpaperById(imageResponse.id)
+					val existingWallpaper = wallpaperDao.getWallpaperById(imageResponse.id).firstOrNull()
 					val isFavourite = existingWallpaper?.isFavourite ?: false
 					toWallpaperEntity(
 						imageResponse = imageResponse,

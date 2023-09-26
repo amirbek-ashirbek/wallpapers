@@ -12,20 +12,29 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 fun GradientOverlay(
+	fromBottomToTop: Boolean = true,
 	height: Dp,
 	alpha: Float,
 	modifier: Modifier = Modifier
 ) {
+	val colors = if (fromBottomToTop) {
+		listOf(
+			Color.Black.copy(alpha = 0f),
+			Color.Black.copy(alpha = alpha)
+		)
+	} else {
+		listOf(
+			Color.Black.copy(alpha = alpha),
+			Color.Black.copy(alpha = 0f)
+		)
+	}
 	Box(
 		modifier = modifier
 			.fillMaxWidth()
 			.height(height = height)
 			.background(
 				brush = Brush.verticalGradient(
-					listOf(
-						Color.Black.copy(alpha = 0f),
-						Color.Black.copy(alpha = alpha)
-					)
+					colors = colors
 				)
 			)
 	)

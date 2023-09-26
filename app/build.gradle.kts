@@ -42,11 +42,11 @@ android {
 		}
 	}
 	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_1_8
-		targetCompatibility = JavaVersion.VERSION_1_8
+		sourceCompatibility = JavaVersion.VERSION_11
+		targetCompatibility = JavaVersion.VERSION_11
 	}
 	kotlinOptions {
-		jvmTarget = "1.8"
+		jvmTarget = JavaVersion.VERSION_11.toString()
 	}
 	buildFeatures {
 		compose = true
@@ -123,5 +123,8 @@ dependencies {
 
 	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
 
+	// Compose Destinations
+	implementation("io.github.raamcosta.compose-destinations:core:1.9.53")
+	ksp("io.github.raamcosta.compose-destinations:ksp:1.9.53")
 
 }
