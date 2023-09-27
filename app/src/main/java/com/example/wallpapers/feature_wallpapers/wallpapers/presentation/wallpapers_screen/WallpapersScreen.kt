@@ -35,6 +35,7 @@ fun WallpapersScreen(
 	WallpapersScreenContent(
 		wallpapers = wallpapersViewModel.wallpapers.collectAsLazyPagingItems(),
 		uiState = wallpapersViewModel.uiState.collectAsStateWithLifecycle().value,
+		headerTitle = stringResource(id = R.string.wallpapers),
 		onWallpaperClicked = { wallpaper ->
 			navigator.navigate(
 				SingleWallpaperScreenDestination(
@@ -53,7 +54,8 @@ fun WallpapersScreen(
 @Composable
 fun WallpapersScreenContent(
 	wallpapers: LazyPagingItems<Wallpaper>,
-	uiState: WallpapersState,
+	headerTitle: String,
+	uiState: WallpapersState?,
 	onWallpaperClicked: (Wallpaper) -> Unit
 ) {
 
@@ -63,7 +65,7 @@ fun WallpapersScreenContent(
 	) {
 		Column {
 			Header(
-				text = stringResource(id = R.string.wallpapers)
+				text = headerTitle
 			)
 			Spacer(modifier = Modifier.height(16.dp))
 			WallpapersGrid(

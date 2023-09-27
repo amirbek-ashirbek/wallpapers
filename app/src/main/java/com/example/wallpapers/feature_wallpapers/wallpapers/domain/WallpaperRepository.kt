@@ -15,4 +15,6 @@ interface WallpaperRepository {
 
 	suspend fun updateWallpaper(wallpaper: Wallpaper)
 
+	fun getFavouriteWallpapers(): Flow<PagingData<Wallpaper>>
+
 }

@@ -15,7 +15,7 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.Unsplash
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.WallpaperRepository
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
-import com.example.wallpapers.util.Constants
+import com.example.wallpapers.util.Constants.ITEMS_PER_PAGE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -29,7 +29,7 @@ class WallpaperRepositoryImpl @Inject constructor(
 	override fun getWallpapersByCategory(categoryId: String): Flow<PagingData<Wallpaper>> {
 
 		val pager = Pager(
-			config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),
+			config = PagingConfig(pageSize = ITEMS_PER_PAGE),
 			remoteMediator = WallpaperRemoteMediator(
 				unsplashApi = unsplashApi,
 				wallpaperDatabase = wallpaperDatabase,
@@ -58,10 +58,25 @@ class WallpaperRepositoryImpl @Inject constructor(
 		wallpaperDatabase.wallpaperDao().updateWallpaper(wallpaperEntity = wallpaperEntity)
 	}
 
+	override fun getFavouriteWallpapers(): Flow<PagingData<Wallpaper>> {
+		val pager = Pager(
+			config = PagingConfig(
+				pageSize = ITEMS_PER_PAGE
+			),
+			pagingSourceFactory = { wallpaperDatabase.wallpaperDao().getFavouriteWallpapers() }
+		)
+
+		return pager.flow.map { pagingData ->
+			pagingData.map { wallpaperEntity ->
+				toWallpaper(wallpaperEntity = wallpaperEntity)
+			}
+		}
+	}
+
 	override fun getAllWallpaperCategories(): Flow<PagingData<WallpaperCategory>> {
 
 		val pager = Pager(
-			config = PagingConfig(pageSize = Constants.ITEMS_PER_PAGE),
+			config = PagingConfig(pageSize = ITEMS_PER_PAGE),
 			remoteMediator = WallpaperCategoryRemoteMediator(
 				unsplashApi = unsplashApi,
 				wallpaperDatabase = wallpaperDatabase
