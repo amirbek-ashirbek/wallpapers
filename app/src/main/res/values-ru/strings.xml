@@ -17,4 +17,5 @@
     <string name="categories">Категории</string>
     <string name="favourites">Избранное</string>
     <string name="settings">Настройки</string>
+    <string name="dark_mode">Темная тема</string>
 </resources>

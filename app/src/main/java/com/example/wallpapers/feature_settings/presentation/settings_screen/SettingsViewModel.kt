@@ -27,7 +27,7 @@ class SettingsViewModel @Inject constructor(
 	fun onEvent(event: SettingsEvent) {
 		when (event) {
 			is SettingsEvent.DarkModeToggled -> {
-				saveDarkTheme(isDarkTheme = !_uiState.value.isDarkTheme)
+				saveDarkTheme(isDarkTheme = event.isDarkTheme)
 				getDarkTheme()
 			}
 		}

@@ -1,5 +1,6 @@
 package com.example.wallpapers.feature_settings.presentation.settings_screen
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,9 +35,9 @@ fun SettingsScreen(
 	val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
 	SettingsScreenContent(
-		isDarkTheme = uiState.value.isDarkTheme,
+		isDarkTheme = uiState.value.isDarkTheme ?: isSystemInDarkTheme(),
 		onDarkModeToggled = {
-			viewModel.onEvent(SettingsEvent.DarkModeToggled)
+			viewModel.onEvent(SettingsEvent.DarkModeToggled(it))
 		}
 	)
 
@@ -87,7 +88,7 @@ fun DarkModeSwitch(
 		)
 		Spacer(modifier = Modifier.width(12.dp))
 		Text(
-			text = "Dark mode"
+			text = stringResource(id = R.string.dark_mode)
 		)
 		Spacer(modifier = Modifier.weight(1f))
 		Switch(
