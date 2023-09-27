@@ -81,6 +81,7 @@ fun WallpapersScreenContent(
 			uiState.categories?.let { categories ->
 				CategoriesRow(
 					categories = categories,
+					selectedCategoryId = uiState.selectedCategoryId,
 					onCategoryClicked = { category ->
 						onCategoryClicked(category)
 					}

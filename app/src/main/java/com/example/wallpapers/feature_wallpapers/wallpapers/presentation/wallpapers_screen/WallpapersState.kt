@@ -3,5 +3,6 @@ package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpa
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
 
 data class WallpapersState(
-	val categories: List<WallpaperCategory>? = null
+	val categories: List<WallpaperCategory>? = null,
+	val selectedCategoryId: String
 )

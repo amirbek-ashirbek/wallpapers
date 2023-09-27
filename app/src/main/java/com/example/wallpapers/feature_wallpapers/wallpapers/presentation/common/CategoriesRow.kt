@@ -5,23 +5,18 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
 
 @Composable
 fun CategoriesRow(
 	categories: List<WallpaperCategory>,
+	selectedCategoryId: String,
 	onCategoryClicked: (WallpaperCategory) -> Unit
 ) {
-
-	var tabIndex by remember { mutableIntStateOf(0) }
 	
 	ScrollableTabRow(
-		selectedTabIndex = tabIndex,
+		selectedTabIndex = categories.indexOfFirst { it.id == selectedCategoryId },
 		edgePadding = 32.dp
 	) {
 		categories.forEachIndexed { index, category ->
@@ -32,9 +27,8 @@ fun CategoriesRow(
 						style = MaterialTheme.typography.titleMedium
 					)
 				},
-				selected = tabIndex == index,
+				selected = selectedCategoryId == category.id,
 				onClick = {
-					tabIndex = index
 					onCategoryClicked(category)
 				},
 			)

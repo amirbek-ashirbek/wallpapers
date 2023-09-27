@@ -23,22 +23,24 @@ class WallpapersViewModel @Inject constructor(
 	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-	private val _uiState = MutableStateFlow(WallpapersState())
+	private val navArgs: WallpapersScreenNavArgs = savedStateHandle.navArgs()
+	private val initialCategoryId = navArgs.categoryId
+
+	private val _uiState = MutableStateFlow(WallpapersState(selectedCategoryId = initialCategoryId))
 	val uiState: StateFlow<WallpapersState> = _uiState
 
 	private val _wallpapers = MutableStateFlow<PagingData<Wallpaper>>(PagingData.empty())
 	val wallpapers: StateFlow<PagingData<Wallpaper>> = _wallpapers
 
-	private val navArgs: WallpapersScreenNavArgs = savedStateHandle.navArgs()
-
 	init {
 		getCategories()
-		getWallpapersByCategory(categoryId = navArgs.categoryId)
+		getWallpapersByCategory(categoryId = initialCategoryId)
 	}
 
 	fun onEvent(event: WallpapersEvent) {
 		when (event) {
 			is WallpapersEvent.CategoryItemClicked -> {
+				_uiState.update { it.copy(selectedCategoryId = event.category.id) }
 				getWallpapersByCategory(categoryId = event.category.id)
 			}
 		}
