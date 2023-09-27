@@ -17,9 +17,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.GradientOverlay
 
@@ -41,8 +43,12 @@ fun WallpaperItem(
 			)
 	) {
 		AsyncImage(
-			model = url,
-			placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
+			model = ImageRequest
+				.Builder(LocalContext.current)
+				.data(url)
+				.crossfade(durationMillis = 1000)
+				.build(),
+			placeholder = painterResource(id = R.drawable.placeholder_image),
 			contentDescription = null,
 			contentScale = ContentScale.Crop,
 			modifier = Modifier

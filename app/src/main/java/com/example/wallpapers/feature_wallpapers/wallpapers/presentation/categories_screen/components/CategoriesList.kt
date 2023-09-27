@@ -20,7 +20,6 @@ fun CategoriesList(
 ) {
 	LazyColumn(
 		modifier = modifier
-//			.fillMaxSize()
 			.padding(horizontal = 12.dp)
 	) {
 		items(
