@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_screen">Главный экран</string>
+    <string name="lock_screen">Экран блокировки</string>
+    <string name="home_and_lock_screens">Оба экрана</string>
+    <string name="download">Скачать</string>
+    <string name="apply">Установить</string>
+    <string name="apply_wallpaper_on">Установить обои на</string>
+    <string name="wallpaper_set_successfully">Обои установлены успешно</string>
+    <string name="error_occurred">Произошла ошибка</string>
+    <string name="no_internet">Отсутствует подключение к интернету</string>
+    <string name="check_your_internet_connection">Пожалуйста, проверьте соединение с интернетом и попробуйте еще раз.</string>
+    <string name="ok">ОК</string>
+
+    <string name="favourite">Избранное</string>
+    <string name="wallpapers">Обои</string>
+    <string name="categories">Категории</string>
+    <string name="favourites">Избранное</string>
+</resources>

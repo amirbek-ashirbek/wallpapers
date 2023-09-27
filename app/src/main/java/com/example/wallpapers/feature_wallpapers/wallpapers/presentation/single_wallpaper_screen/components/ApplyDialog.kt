@@ -44,7 +44,7 @@ fun ApplyDialog(
 				)
 				Spacer(modifier = Modifier.height(8.dp))
 				Text(
-					text = "Set wallpaper on",
+					text = stringResource(id = R.string.apply_wallpaper_on),
 					style = MaterialTheme.typography.titleLarge
 				)
 				Spacer(modifier = Modifier.height(24.dp))

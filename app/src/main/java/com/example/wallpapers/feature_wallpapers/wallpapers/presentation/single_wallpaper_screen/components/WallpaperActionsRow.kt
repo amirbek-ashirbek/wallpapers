@@ -33,13 +33,13 @@ fun WallpaperActionsRow(
 	) {
 		ActionItem(
 			imageResId = R.drawable.icon_download,
-			title = "Download",
+			title = stringResource(id = R.string.download),
 			onClick = onDownloadClicked
 		)
 		Spacer(modifier = Modifier.width(64.dp))
 		ActionItem(
 			imageResId = R.drawable.icon_apply,
-			title = "Apply",
+			title = stringResource(id = R.string.apply),
 			onClick = onApplyClicked
 		)
 		Spacer(modifier = Modifier.width(64.dp))
