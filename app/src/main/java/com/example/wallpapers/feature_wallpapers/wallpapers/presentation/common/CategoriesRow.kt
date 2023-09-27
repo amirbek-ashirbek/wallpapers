@@ -14,7 +14,7 @@ fun CategoriesRow(
 	selectedCategoryId: String,
 	onCategoryClicked: (WallpaperCategory) -> Unit
 ) {
-	
+
 	ScrollableTabRow(
 		selectedTabIndex = categories.indexOfFirst { it.id == selectedCategoryId },
 		edgePadding = 32.dp
@@ -31,6 +31,7 @@ fun CategoriesRow(
 				onClick = {
 					onCategoryClicked(category)
 				},
+				unselectedContentColor = MaterialTheme.colorScheme.secondary
 			)
 		}
 	}
