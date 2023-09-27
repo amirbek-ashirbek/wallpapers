@@ -61,11 +61,23 @@ android {
 			excludes += "/META-INF/{AL2.0,LGPL2.1}"
 		}
 	}
+	applicationVariants.all {
+		addJavaSourceFoldersToModel(
+			File(buildDir, "generated/ksp/$name/kotlin")
+		)
+	}
+	androidComponents.onVariants { variant ->
+		val name = variant.name
+		sourceSets {
+			getByName(name).kotlin.srcDir("${buildDir.absolutePath}/generated/ksp/${name}/kotlin")
+		}
+	}
 }
 
 dependencies {
 	val room_version = "2.5.2"
 
+	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
 	implementation("androidx.core:core-ktx:1.9.0")
 	implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 	implementation("androidx.activity:activity-compose:1.7.2")
@@ -86,7 +98,7 @@ dependencies {
 	implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
 	// Navigation
-	implementation("androidx.navigation:navigation-compose:2.7.2")
+	implementation("androidx.navigation:navigation-compose:2.7.3")
 
 	// Serialization
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
@@ -122,12 +134,14 @@ dependencies {
 	debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
 	releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
-	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
-
 	// Compose Destinations
 	implementation("io.github.raamcosta.compose-destinations:core:1.9.53")
 	ksp("io.github.raamcosta.compose-destinations:ksp:1.9.53")
 
+	// LeakCanary
 	debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+
+	// DataStore
+	implementation("androidx.datastore:datastore-preferences:1.0.0")
 
 }

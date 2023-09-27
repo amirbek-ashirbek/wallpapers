@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".feature_wallpapers.wallpapers.data.DownloadCompletedReceiver"
+            android:name=".feature_wallpapers.data.DownloadCompletedReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
