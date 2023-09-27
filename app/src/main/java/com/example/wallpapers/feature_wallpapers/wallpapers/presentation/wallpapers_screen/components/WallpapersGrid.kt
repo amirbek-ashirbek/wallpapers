@@ -20,7 +20,7 @@ fun WallpapersGrid(
 ) {
 	LazyVerticalGrid(
 		columns = GridCells.Fixed(2),
-		contentPadding = PaddingValues(8.dp),
+		contentPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 8.dp),
 		modifier = modifier
 			.fillMaxSize()
 	) {

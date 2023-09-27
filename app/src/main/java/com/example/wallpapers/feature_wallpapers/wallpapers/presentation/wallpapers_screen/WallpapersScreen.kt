@@ -1,14 +1,21 @@
 package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.Header
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.SingleWallpaperScreenDestination
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.single_wallpaper_screen.SingleWallpaperScreenNavArgs
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.components.WallpapersGrid
@@ -54,10 +61,15 @@ fun WallpapersScreenContent(
 		modifier = Modifier
 			.fillMaxSize()
 	) {
-		WallpapersGrid(
-			wallpapers = wallpapers,
-			onWallpaperClicked = onWallpaperClicked
-		)
+		Column {
+			Header(
+				text = stringResource(id = R.string.wallpapers)
+			)
+			Spacer(modifier = Modifier.height(16.dp))
+			WallpapersGrid(
+				wallpapers = wallpapers,
+				onWallpaperClicked = onWallpaperClicked
+			)
+		}
 	}
-
 }
