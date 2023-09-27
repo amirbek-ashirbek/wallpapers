@@ -26,19 +26,22 @@ fun BottomBar(navController: NavHostController) {
 	)
 	val navBackStackEntry by navController.currentBackStackEntryAsState()
 	val currentDestination = navBackStackEntry?.destination
-	NavigationBar(
-		modifier = Modifier
-			.clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-	)  {
-		screens.forEach { screen ->
-			AddItem(
-				screen = screen,
-				currentDestination = currentDestination,
-				navController = navController
-			)
+	val bottomBarDestination = screens.any { it.route == currentDestination?.route }
+
+	if (bottomBarDestination) {
+		NavigationBar(
+			modifier = Modifier
+				.clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+		)  {
+			screens.forEach { screen ->
+				AddItem(
+					screen = screen,
+					currentDestination = currentDestination,
+					navController = navController
+				)
+			}
 		}
 	}
-
 }
 
 @Composable
@@ -47,6 +50,7 @@ fun RowScope.AddItem(
 	currentDestination: NavDestination?,
 	navController: NavHostController
 ) {
+
 	val selected = currentDestination?.hierarchy?.any {it.route == screen.route} == true
 
 	NavigationBarItem(

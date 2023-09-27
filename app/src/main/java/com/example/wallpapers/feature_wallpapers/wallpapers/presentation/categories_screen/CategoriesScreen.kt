@@ -56,7 +56,9 @@ fun CategoriesScreenContent(
 	) {
 		Column {
 			Header(
-				text = stringResource(id = R.string.categories)
+				text = stringResource(id = R.string.categories),
+				needsBackButton = false,
+				onBackClicked = {}
 			)
 			Spacer(modifier = Modifier.height(16.dp))
 			CategoriesList(

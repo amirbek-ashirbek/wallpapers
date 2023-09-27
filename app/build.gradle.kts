@@ -39,6 +39,7 @@ android {
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
 			)
+			signingConfig = signingConfigs.getByName("debug")
 		}
 	}
 	compileOptions {
@@ -126,5 +127,7 @@ dependencies {
 	// Compose Destinations
 	implementation("io.github.raamcosta.compose-destinations:core:1.9.53")
 	ksp("io.github.raamcosta.compose-destinations:ksp:1.9.53")
+
+	debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
 
 }

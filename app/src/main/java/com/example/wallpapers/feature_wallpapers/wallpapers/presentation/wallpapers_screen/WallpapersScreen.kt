@@ -46,7 +46,8 @@ fun WallpapersScreen(
 					)
 				)
 			)
-		}
+		},
+		onBackClicked = { navigator.popBackStack() }
 	)
 
 }
@@ -56,7 +57,8 @@ fun WallpapersScreenContent(
 	wallpapers: LazyPagingItems<Wallpaper>,
 	headerTitle: String,
 	uiState: WallpapersState?,
-	onWallpaperClicked: (Wallpaper) -> Unit
+	onWallpaperClicked: (Wallpaper) -> Unit,
+	onBackClicked: () -> Unit
 ) {
 
 	Surface(
@@ -65,7 +67,9 @@ fun WallpapersScreenContent(
 	) {
 		Column {
 			Header(
-				text = headerTitle
+				text = headerTitle,
+				needsBackButton = true,
+				onBackClicked = onBackClicked
 			)
 			Spacer(modifier = Modifier.height(16.dp))
 			WallpapersGrid(
