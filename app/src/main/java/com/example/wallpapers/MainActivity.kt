@@ -15,11 +15,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.NavGraphs
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.CategoriesScreenDestination
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.FavouritesScreenDestination
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.SingleWallpaperScreenDestination
-import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.WallpapersScreenDestination
+import com.example.wallpapers.feature_wallpapers.presentation.NavGraphs
+import com.example.wallpapers.feature_wallpapers.presentation.destinations.CategoriesScreenDestination
+import com.example.wallpapers.feature_wallpapers.presentation.destinations.FavouritesScreenDestination
+import com.example.wallpapers.feature_wallpapers.presentation.destinations.SingleWallpaperScreenDestination
+import com.example.wallpapers.feature_wallpapers.presentation.destinations.WallpapersScreenDestination
 import com.example.wallpapers.navigation.BottomBar
 import com.example.wallpapers.ui.theme.WallpapersTheme
 import com.ramcosta.composedestinations.DestinationsNavHost

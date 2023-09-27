@@ -61,6 +61,17 @@ android {
 			excludes += "/META-INF/{AL2.0,LGPL2.1}"
 		}
 	}
+	applicationVariants.all {
+		addJavaSourceFoldersToModel(
+			File(buildDir, "generated/ksp/$name/kotlin")
+		)
+	}
+	androidComponents.onVariants { variant ->
+		val name = variant.name
+		sourceSets {
+			getByName(name).kotlin.srcDir("${buildDir.absolutePath}/generated/ksp/${name}/kotlin")
+		}
+	}
 }
 
 dependencies {
@@ -86,7 +97,7 @@ dependencies {
 	implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
 	// Navigation
-	implementation("androidx.navigation:navigation-compose:2.7.2")
+	implementation("androidx.navigation:navigation-compose:2.7.3")
 
 	// Serialization
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
