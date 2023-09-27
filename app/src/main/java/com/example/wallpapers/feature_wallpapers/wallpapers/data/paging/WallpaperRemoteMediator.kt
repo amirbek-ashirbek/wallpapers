@@ -13,10 +13,9 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.im
 import kotlinx.coroutines.flow.firstOrNull
 import okio.IOException
 import retrofit2.HttpException
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class WallpaperRemoteMediator @Inject constructor(
+class WallpaperRemoteMediator(
 	private val categoryId: String,
 	private val unsplashApi: UnsplashApi,
 	private val wallpaperDatabase: WallpaperDatabase
