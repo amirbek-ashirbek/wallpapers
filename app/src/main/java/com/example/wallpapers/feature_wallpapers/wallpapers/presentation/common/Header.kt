@@ -43,6 +43,7 @@ fun Header(
 			Text(
 				text = text,
 				style = MaterialTheme.typography.headlineLarge.copy(
+					color = MaterialTheme.colorScheme.primary,
 					fontWeight = FontWeight.SemiBold
 				)
 			)

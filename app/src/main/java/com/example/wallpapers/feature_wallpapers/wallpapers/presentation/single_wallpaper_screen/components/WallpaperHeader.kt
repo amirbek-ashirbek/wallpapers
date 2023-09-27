@@ -37,7 +37,9 @@ fun WallpaperHeader(
 		Spacer(modifier = Modifier.width(12.dp))
 		Text(
 			text = text,
-			style = MaterialTheme.typography.headlineLarge.copy(color = Color.White)
+			style = MaterialTheme.typography.headlineLarge.copy(
+				color = Color.White
+			)
 		)
 	}
 }

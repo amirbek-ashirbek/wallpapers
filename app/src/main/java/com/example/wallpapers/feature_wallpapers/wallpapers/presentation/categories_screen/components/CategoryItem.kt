@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
@@ -18,7 +19,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.GradientOverlay
 
@@ -44,7 +44,7 @@ fun CategoryItem(
 			contentScale = ContentScale.Crop,
 			modifier = Modifier
 				.fillMaxSize()
-				.aspectRatio(5f / 2f)
+				.aspectRatio(19f / 10f)
 		)
 		GradientOverlay(
 			height = textHeight.intValue.dp,
@@ -54,9 +54,10 @@ fun CategoryItem(
 		)
 		Text(
 			text = title,
-			color = Color.White,
-			fontWeight = FontWeight.Bold,
-			fontSize = 16.sp,
+			style = MaterialTheme.typography.titleMedium.copy(
+				color = Color.White,
+				fontWeight = FontWeight.Normal
+			),
 			modifier = Modifier
 				.align(Alignment.BottomStart)
 				.padding(start = 21.dp, bottom = 16.dp)
