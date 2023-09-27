@@ -15,6 +15,8 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.Wallpaper
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.CategoriesRow
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.Header
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.SingleWallpaperScreenDestination
 import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.single_wallpaper_screen.SingleWallpaperScreenNavArgs
@@ -47,6 +49,9 @@ fun WallpapersScreen(
 				)
 			)
 		},
+		onCategoryClicked = { category ->
+			wallpapersViewModel.onEvent(WallpapersEvent.CategoryItemClicked(category))
+		},
 		onBackClicked = { navigator.popBackStack() }
 	)
 
@@ -56,8 +61,9 @@ fun WallpapersScreen(
 fun WallpapersScreenContent(
 	wallpapers: LazyPagingItems<Wallpaper>,
 	headerTitle: String,
-	uiState: WallpapersState?,
+	uiState: WallpapersState,
 	onWallpaperClicked: (Wallpaper) -> Unit,
+	onCategoryClicked: (WallpaperCategory) -> Unit,
 	onBackClicked: () -> Unit
 ) {
 
@@ -71,6 +77,15 @@ fun WallpapersScreenContent(
 				needsBackButton = true,
 				onBackClicked = onBackClicked
 			)
+			Spacer(modifier = Modifier.height(24.dp))
+			uiState.categories?.let { categories ->
+				CategoriesRow(
+					categories = categories,
+					onCategoryClicked = { category ->
+						onCategoryClicked(category)
+					}
+				)
+			}
 			Spacer(modifier = Modifier.height(16.dp))
 			WallpapersGrid(
 				wallpapers = wallpapers,

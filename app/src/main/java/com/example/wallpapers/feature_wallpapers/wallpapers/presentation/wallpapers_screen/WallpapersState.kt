@@ -1,5 +1,7 @@
 package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen
 
+import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
+
 data class WallpapersState(
-	val hello: String = "yo"
+	val categories: List<WallpaperCategory>? = null
 )

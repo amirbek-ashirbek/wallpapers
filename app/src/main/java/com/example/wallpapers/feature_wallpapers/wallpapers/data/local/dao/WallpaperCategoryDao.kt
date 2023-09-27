@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperCategoryEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WallpaperCategoryDao {
@@ -14,6 +15,9 @@ interface WallpaperCategoryDao {
 
 	@Query("SELECT * FROM wallpaper_categories")
 	fun pagingSource(): PagingSource<Int, WallpaperCategoryEntity>
+
+	@Query("SELECT * FROM wallpaper_categories")
+	fun getAllCategories(): Flow<List<WallpaperCategoryEntity>>
 
 	@Query("DELETE FROM  wallpaper_categories")
 	suspend fun clearAll()

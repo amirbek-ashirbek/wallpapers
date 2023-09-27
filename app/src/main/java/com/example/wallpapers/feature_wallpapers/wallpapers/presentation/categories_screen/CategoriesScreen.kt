@@ -31,7 +31,7 @@ fun CategoriesScreen(
 	val categoriesViewModel: CategoriesViewModel = hiltViewModel()
 
 	CategoriesScreenContent(
-		categories = categoriesViewModel.categoriesPaged.collectAsLazyPagingItems(),
+		categories = categoriesViewModel.categories.collectAsLazyPagingItems(),
 		onCategoryClicked = { categoryId ->
 			navigator.navigate(
 				WallpapersScreenDestination(

@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface WallpaperRepository {
 
-	fun getAllWallpaperCategories(): Flow<PagingData<WallpaperCategory>>
+	fun getAllWallpaperCategoriesPaged(): Flow<PagingData<WallpaperCategory>>
+
+	fun getAllWallpaperCategories(): Flow<List<WallpaperCategory>>
 
 	fun getWallpapersByCategory(categoryId: String): Flow<PagingData<Wallpaper>>
 

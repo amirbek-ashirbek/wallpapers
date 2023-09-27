@@ -73,7 +73,7 @@ class WallpaperRepositoryImpl @Inject constructor(
 		}
 	}
 
-	override fun getAllWallpaperCategories(): Flow<PagingData<WallpaperCategory>> {
+	override fun getAllWallpaperCategoriesPaged(): Flow<PagingData<WallpaperCategory>> {
 
 		val pager = Pager(
 			config = PagingConfig(pageSize = ITEMS_PER_PAGE),
@@ -88,6 +88,14 @@ class WallpaperRepositoryImpl @Inject constructor(
 
 		return pager.flow.map { pagingData ->
 			pagingData.map { categoryEntity ->
+				toWallpaperCategory(entity = categoryEntity)
+			}
+		}
+	}
+
+	override fun getAllWallpaperCategories(): Flow<List<WallpaperCategory>> {
+		return wallpaperDatabase.wallpaperCategoryDao().getAllCategories().map { categoriesList ->
+			categoriesList.map { categoryEntity ->
 				toWallpaperCategory(entity = categoryEntity)
 			}
 		}
