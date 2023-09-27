@@ -9,7 +9,7 @@ import com.example.wallpapers.feature_wallpapers.domain.use_case.GetSingleWallpa
 import com.example.wallpapers.feature_wallpapers.domain.use_case.UpdateWallpaperIsFavouriteUseCase
 import com.example.wallpapers.feature_wallpapers.presentation.WallpaperApplyScreen
 import com.example.wallpapers.feature_wallpapers.presentation.WallpaperSetter
-import com.example.wallpapers.feature_wallpapers.presentation.navArgs
+import com.example.wallpapers.navArgs
 import com.example.wallpapers.util.DownloadResult
 import com.example.wallpapers.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel

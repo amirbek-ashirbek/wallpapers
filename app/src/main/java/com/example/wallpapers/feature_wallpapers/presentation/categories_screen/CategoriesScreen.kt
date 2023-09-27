@@ -14,10 +14,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.wallpapers.R
+import com.example.wallpapers.destinations.WallpapersScreenDestination
 import com.example.wallpapers.feature_wallpapers.domain.model.WallpaperCategory
 import com.example.wallpapers.feature_wallpapers.presentation.categories_screen.components.CategoriesList
 import com.example.wallpapers.feature_wallpapers.presentation.common.Header
-import com.example.wallpapers.feature_wallpapers.presentation.destinations.WallpapersScreenDestination
 import com.example.wallpapers.feature_wallpapers.presentation.wallpapers_screen.WallpapersScreenNavArgs
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

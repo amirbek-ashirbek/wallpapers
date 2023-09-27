@@ -8,7 +8,7 @@ import androidx.paging.cachedIn
 import com.example.wallpapers.feature_wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.domain.use_case.GetCategoriesUseCase
 import com.example.wallpapers.feature_wallpapers.domain.use_case.GetWallpapersByCategoryUseCase
-import com.example.wallpapers.feature_wallpapers.presentation.navArgs
+import com.example.wallpapers.navArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

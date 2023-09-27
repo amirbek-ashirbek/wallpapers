@@ -3,9 +3,9 @@ package com.example.wallpapers.navigation
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.wallpapers.R
-import com.example.wallpapers.feature_wallpapers.presentation.destinations.CategoriesScreenDestination
-import com.example.wallpapers.feature_wallpapers.presentation.destinations.FavouritesScreenDestination
-import com.example.wallpapers.feature_wallpapers.presentation.destinations.SettingsScreenDestination
+import com.example.wallpapers.destinations.CategoriesScreenDestination
+import com.example.wallpapers.destinations.FavouritesScreenDestination
+import com.example.wallpapers.destinations.SettingsScreenDestination
 
 sealed class BottomBarScreen(
 	val route: String,

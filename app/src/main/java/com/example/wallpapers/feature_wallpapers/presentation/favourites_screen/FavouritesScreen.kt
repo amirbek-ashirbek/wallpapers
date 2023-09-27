@@ -13,9 +13,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.wallpapers.R
+import com.example.wallpapers.destinations.SingleWallpaperScreenDestination
 import com.example.wallpapers.feature_wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.presentation.common.Header
-import com.example.wallpapers.feature_wallpapers.presentation.destinations.SingleWallpaperScreenDestination
 import com.example.wallpapers.feature_wallpapers.presentation.single_wallpaper_screen.SingleWallpaperScreenNavArgs
 import com.example.wallpapers.feature_wallpapers.presentation.wallpapers_screen.WallpapersState
 import com.example.wallpapers.feature_wallpapers.presentation.wallpapers_screen.components.WallpapersGrid

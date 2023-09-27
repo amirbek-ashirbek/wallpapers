@@ -1,4 +1,4 @@
-package com.example.wallpapers.feature_wallpapers.presentation.settings_screen
+package com.example.wallpapers.feature_settings.presentation.settings_screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,15 +14,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.presentation.common.Header
 import com.ramcosta.composedestinations.annotation.Destination
@@ -32,12 +30,23 @@ import com.ramcosta.composedestinations.annotation.Destination
 fun SettingsScreen(
 ) {
 
-	SettingsScreenContent()
+	val viewModel: SettingsViewModel = hiltViewModel()
+	val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+
+	SettingsScreenContent(
+		isDarkTheme = uiState.value.isDarkTheme,
+		onDarkModeToggled = {
+			viewModel.onEvent(SettingsEvent.DarkModeToggled)
+		}
+	)
 
 }
 
 @Composable
-fun SettingsScreenContent() {
+fun SettingsScreenContent(
+	isDarkTheme: Boolean,
+	onDarkModeToggled: (Boolean) -> Unit
+) {
 
 	Surface(
 		modifier = Modifier
@@ -51,6 +60,8 @@ fun SettingsScreenContent() {
 			)
 			Spacer(modifier = Modifier.height(32.dp))
 			DarkModeSwitch(
+				isDarkTheme = isDarkTheme,
+				onDarkModeToggled = onDarkModeToggled,
 				modifier = Modifier.padding(horizontal = 24.dp)
 			)
 
@@ -60,10 +71,10 @@ fun SettingsScreenContent() {
 
 @Composable
 fun DarkModeSwitch(
+	isDarkTheme: Boolean,
+	onDarkModeToggled: (Boolean) -> Unit,
 	modifier: Modifier = Modifier
 ) {
-
-	var checked by remember { mutableStateOf(true) }
 
 	Row(
 		verticalAlignment = Alignment.CenterVertically,
@@ -80,8 +91,8 @@ fun DarkModeSwitch(
 		)
 		Spacer(modifier = Modifier.weight(1f))
 		Switch(
-			checked = checked,
-			onCheckedChange = { checked = it },
+			checked = isDarkTheme,
+			onCheckedChange = onDarkModeToggled,
 		)
 	}
 }

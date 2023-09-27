@@ -77,6 +77,7 @@ android {
 dependencies {
 	val room_version = "2.5.2"
 
+	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
 	implementation("androidx.core:core-ktx:1.9.0")
 	implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 	implementation("androidx.activity:activity-compose:1.7.2")
@@ -133,12 +134,14 @@ dependencies {
 	debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
 	releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
-	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
-
 	// Compose Destinations
 	implementation("io.github.raamcosta.compose-destinations:core:1.9.53")
 	ksp("io.github.raamcosta.compose-destinations:ksp:1.9.53")
 
+	// LeakCanary
 	debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+
+	// DataStore
+	implementation("androidx.datastore:datastore-preferences:1.0.0")
 
 }
