@@ -39,14 +39,15 @@ android {
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
 			)
+			signingConfig = signingConfigs.getByName("debug")
 		}
 	}
 	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_1_8
-		targetCompatibility = JavaVersion.VERSION_1_8
+		sourceCompatibility = JavaVersion.VERSION_11
+		targetCompatibility = JavaVersion.VERSION_11
 	}
 	kotlinOptions {
-		jvmTarget = "1.8"
+		jvmTarget = JavaVersion.VERSION_11.toString()
 	}
 	buildFeatures {
 		compose = true
@@ -81,6 +82,9 @@ dependencies {
 	debugImplementation("androidx.compose.ui:ui-tooling")
 	debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+	// Compose
+	implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
 	// Navigation
 	implementation("androidx.navigation:navigation-compose:2.7.2")
 
@@ -111,9 +115,19 @@ dependencies {
 	implementation("androidx.room:room-paging:$room_version")
 
 	// Coil
+	implementation("io.coil-kt:coil-base:2.4.0")
 	implementation("io.coil-kt:coil-compose:2.4.0")
 
 	// Chucker
 	debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
 	releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
+
+	// Compose Destinations
+	implementation("io.github.raamcosta.compose-destinations:core:1.9.53")
+	ksp("io.github.raamcosta.compose-destinations:ksp:1.9.53")
+
+	debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+
 }

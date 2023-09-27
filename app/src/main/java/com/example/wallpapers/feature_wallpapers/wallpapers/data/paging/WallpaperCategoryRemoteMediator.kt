@@ -12,10 +12,9 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.Unsplash
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.topics.TopicResponse
 import retrofit2.HttpException
 import java.io.IOException
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class WallpaperCategoryRemoteMediator @Inject constructor(
+class WallpaperCategoryRemoteMediator(
 	private val unsplashApi: UnsplashApi,
 	private val wallpaperDatabase: WallpaperDatabase
 ) : RemoteMediator<Int, WallpaperCategoryEntity>() {
@@ -67,7 +66,7 @@ class WallpaperCategoryRemoteMediator @Inject constructor(
 				categoryRemoteKeysDao.addAllRemoteKeys(remoteKeys = keys)
 
 				val categories = response.map { TopicResponse.toWallpaperCategoryEntity(it) }
-				categoryDao.insertAll(categories = categories)
+				categoryDao.upsertAll(categories = categories)
 			}
 			MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
 		} catch (e: IOException) {

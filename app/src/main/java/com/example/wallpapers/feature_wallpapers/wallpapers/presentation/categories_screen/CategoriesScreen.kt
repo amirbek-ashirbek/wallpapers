@@ -1,86 +1,70 @@
 package com.example.wallpapers.feature_wallpapers.wallpapers.presentation.categories_screen
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemContentType
-import androidx.paging.compose.itemKey
-import coil.compose.AsyncImage
+import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.wallpapers.domain.model.WallpaperCategory
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.categories_screen.components.CategoriesList
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.common.Header
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.destinations.WallpapersScreenDestination
+import com.example.wallpapers.feature_wallpapers.wallpapers.presentation.wallpapers_screen.WallpapersScreenNavArgs
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination(start = true)
 @Composable
 fun CategoriesScreen(
-	viewModel: CategoriesViewModel = hiltViewModel()
+	navigator: DestinationsNavigator
 ) {
 
-//	val wallpapersLazyPagingItems: LazyPagingItems<Wallpaper> = viewModel.wallpapersPaged.collectAsLazyPagingItems()
-	val categoriesLazyPagingItems: LazyPagingItems<WallpaperCategory> = viewModel.categoriesPaged.collectAsLazyPagingItems()
+	val categoriesViewModel: CategoriesViewModel = hiltViewModel()
 
-	Box(
+	CategoriesScreenContent(
+		categories = categoriesViewModel.categories.collectAsLazyPagingItems(),
+		onCategoryClicked = { categoryId ->
+			navigator.navigate(
+				WallpapersScreenDestination(
+					navArgs = WallpapersScreenNavArgs(categoryId = categoryId)
+				)
+			)
+		}
+	)
+
+}
+
+@Composable
+fun CategoriesScreenContent(
+	categories: LazyPagingItems<WallpaperCategory>,
+	onCategoryClicked: (String) -> Unit
+) {
+
+	Surface(
+		color = MaterialTheme.colorScheme.surface,
 		modifier = Modifier
 			.fillMaxSize()
 	) {
-
-		LazyVerticalGrid(
-			columns = GridCells.Fixed(2),
-			contentPadding = PaddingValues(8.dp),
-			modifier = Modifier
-				.fillMaxSize()
-		) {
-
-			items(
-				count = categoriesLazyPagingItems.itemCount,
-				key = categoriesLazyPagingItems.itemKey { wallpaper -> wallpaper.id },
-				contentType = categoriesLazyPagingItems.itemContentType { "Categories" }
-			) { index ->
-				val category: WallpaperCategory? = categoriesLazyPagingItems[index]
-
-				if (category != null) {
-					Box(
-						modifier = Modifier
-							.padding(8.dp)
-							.clip(RoundedCornerShape(8.dp))
-							.clickable(
-								onClick = {
-
-								}
-							)
-					) {
-						AsyncImage(
-							model = category.coverPhotoUrl,
-							contentDescription = null,
-							contentScale = ContentScale.Crop,
-							modifier = Modifier
-								.fillMaxSize()
-								.aspectRatio(1f)
-						)
-						Text(
-							text = category.title,
-							color = Color.White,
-							modifier = Modifier
-								.align(Alignment.Center)
-						)
-					}
-
-				}
-			}
+		Column {
+			Header(
+				text = stringResource(id = R.string.categories),
+				needsBackButton = false,
+				onBackClicked = {}
+			)
+			Spacer(modifier = Modifier.height(16.dp))
+			CategoriesList(
+				categories = categories,
+				onCategoryClicked = onCategoryClicked
+			)
 		}
 	}
 }

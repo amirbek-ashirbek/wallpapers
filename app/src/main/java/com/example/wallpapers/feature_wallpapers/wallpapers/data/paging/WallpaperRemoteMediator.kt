@@ -9,13 +9,13 @@ import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.Wallpaper
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperEntity
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperRemoteKeys
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.UnsplashApi
-import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.image.ImageResponse
+import com.example.wallpapers.feature_wallpapers.wallpapers.data.remote.model.image.ImageResponse.Companion.toWallpaperEntity
+import kotlinx.coroutines.flow.firstOrNull
 import okio.IOException
 import retrofit2.HttpException
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class WallpaperRemoteMediator @Inject constructor(
+class WallpaperRemoteMediator(
 	private val categoryId: String,
 	private val unsplashApi: UnsplashApi,
 	private val wallpaperDatabase: WallpaperDatabase
@@ -58,12 +58,13 @@ class WallpaperRemoteMediator @Inject constructor(
 
 			wallpaperDatabase.withTransaction {
 				if (loadType == LoadType.REFRESH) {
-					wallpaperDao.clearAll()
-					wallpaperRemoteKeysDao.clearAll()
+					wallpaperDao.clearAll(categoryId = categoryId)
+					wallpaperRemoteKeysDao.clearAll(categoryId = categoryId)
 				}
 				val keys = response.map { imageResponse ->
 					WallpaperRemoteKeys(
 						id = imageResponse.id,
+						categoryId = categoryId,
 						prevPage = prevPage,
 						nextPage = nextPage
 					)
@@ -71,12 +72,15 @@ class WallpaperRemoteMediator @Inject constructor(
 				wallpaperRemoteKeysDao.addAllRemoteKeys(remoteKeys = keys)
 
 				val wallpapers = response.map { imageResponse ->
-					ImageResponse.toWallpaperEntity(
+					val existingWallpaper = wallpaperDao.getWallpaperById(imageResponse.id).firstOrNull()
+					val isFavourite = existingWallpaper?.isFavourite ?: false
+					toWallpaperEntity(
 						imageResponse = imageResponse,
-						categoryId = categoryId
+						categoryId = categoryId,
+						isFavourite = isFavourite
 					)
 				}
-				wallpaperDao.insertAll(wallpapers = wallpapers)
+				wallpaperDao.upsertAll(wallpapers = wallpapers)
 			}
 			MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
 		} catch (e: IOException) {
@@ -91,7 +95,7 @@ class WallpaperRemoteMediator @Inject constructor(
 	): WallpaperRemoteKeys? {
 		return state.anchorPosition?.let { position ->
 			state.closestItemToPosition(position)?.id?.let { id ->
-				wallpaperRemoteKeysDao.getRemoteKeys(id = id)
+				wallpaperRemoteKeysDao.getRemoteKeys(id = id, categoryId = categoryId)
 			}
 		}
 	}
@@ -104,7 +108,7 @@ class WallpaperRemoteMediator @Inject constructor(
 		val lastItem = lastPage?.data?.lastOrNull()
 
 		return lastItem?.let { wallpaperEntity ->
-			wallpaperRemoteKeysDao.getRemoteKeys(id = wallpaperEntity.id)
+			wallpaperRemoteKeysDao.getRemoteKeys(id = wallpaperEntity.id, categoryId = wallpaperEntity.categoryId)
 		}
 
 	}

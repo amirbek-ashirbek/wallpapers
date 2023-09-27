@@ -10,14 +10,18 @@ data class WallpaperEntity(
 	@PrimaryKey
 	val id: String,
 	val categoryId: String,
-	val url: String
+	val url: String,
+	val downloadUrl: String,
+	val isFavourite: Boolean
 ) {
 	companion object {
 		fun toWallpaper(wallpaperEntity: WallpaperEntity): Wallpaper {
 			return Wallpaper(
 				id = wallpaperEntity.id,
 				categoryId = wallpaperEntity.categoryId,
-				url = wallpaperEntity.url
+				url = wallpaperEntity.url,
+				downloadUrl = wallpaperEntity.downloadUrl,
+				isFavourite = wallpaperEntity.isFavourite
 			)
 		}
 
@@ -25,7 +29,9 @@ data class WallpaperEntity(
 			return WallpaperEntity(
 				id = wallpaper.id,
 				categoryId = wallpaper.categoryId,
-				url = wallpaper.url
+				url = wallpaper.url,
+				downloadUrl = wallpaper.downloadUrl,
+				isFavourite = wallpaper.isFavourite
 			)
 		}
 	}

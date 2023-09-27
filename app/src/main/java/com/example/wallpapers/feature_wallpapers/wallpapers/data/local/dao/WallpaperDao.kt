@@ -2,21 +2,31 @@ package com.example.wallpapers.feature_wallpapers.wallpapers.data.local.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
+import androidx.room.Upsert
 import com.example.wallpapers.feature_wallpapers.wallpapers.data.local.model.WallpaperEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WallpaperDao {
 
-	@Insert(onConflict = OnConflictStrategy.REPLACE)
-	suspend fun insertAll(wallpapers: List<WallpaperEntity>)
+	@Upsert
+	suspend fun upsertAll(wallpapers: List<WallpaperEntity>)
 
-	@Query("SELECT * FROM wallpapers WHERE categoryId LIKE :categoryId")
+	@Query("SELECT * FROM wallpapers WHERE categoryId =:categoryId")
 	fun pagingSource(categoryId: String): PagingSource<Int, WallpaperEntity>
 
-	@Query("DELETE FROM  wallpapers")
-	suspend fun clearAll()
+	@Query("DELETE FROM  wallpapers WHERE categoryId =:categoryId AND isFavourite = 0")
+	suspend fun clearAll(categoryId: String)
+
+	@Query("SELECT * FROM wallpapers WHERE isFavourite = 1")
+	fun getFavouriteWallpapers(): PagingSource<Int, WallpaperEntity>
+
+	@Update
+	suspend fun updateWallpaper(wallpaperEntity: WallpaperEntity)
+
+	@Query("SELECT * FROM wallpapers WHERE id =:id")
+	fun getWallpaperById(id: String): Flow<WallpaperEntity>
 
 }

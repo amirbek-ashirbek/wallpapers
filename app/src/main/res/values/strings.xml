@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Wallpapers</string>
+
+    <string name="home_screen">Home screen</string>
+    <string name="lock_screen">Lock screen</string>
+    <string name="home_and_lock_screens">Home and lock screens</string>
+    <string name="download">Download</string>
+    <string name="apply">Apply</string>
+    <string name="apply_wallpaper_on">Apply wallpaper on</string>
+    <string name="wallpaper_set_successfully">Wallpaper set successfully</string>
+    <string name="error_occurred">An error occurred</string>
+    <string name="no_internet">No internet connection</string>
+    <string name="check_your_internet_connection">Please, check your internet connection and try again.</string>
+    <string name="ok">OK</string>
+
+    <string name="favourite">Favourite</string>
+    <string name="wallpapers">Wallpapers</string>
+    <string name="categories">Categories</string>
+    <string name="favourites">Favourites</string>
 </resources>

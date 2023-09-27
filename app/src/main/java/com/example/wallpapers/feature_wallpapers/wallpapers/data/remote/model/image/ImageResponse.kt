@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ImageResponse(
     @Json(name = "blur_hash")
-    val blurHash: String,
+    val blurHash: String?,
     @Json(name = "color")
     val color: String,
     @Json(name = "created_at")
@@ -34,11 +34,13 @@ data class ImageResponse(
 ) {
     companion object {
 
-        fun toWallpaperEntity(imageResponse: ImageResponse, categoryId: String): WallpaperEntity {
+        fun toWallpaperEntity(imageResponse: ImageResponse, categoryId: String, isFavourite: Boolean): WallpaperEntity {
             return WallpaperEntity(
                 id = imageResponse.id,
                 categoryId = categoryId,
-                url = imageResponse.urls.regular
+                url = imageResponse.urls.regular,
+                downloadUrl = imageResponse.links.download,
+                isFavourite = isFavourite
             )
         }
     }
