@@ -3,11 +3,14 @@ package com.example.wallpapers
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -34,6 +37,7 @@ class MainActivity : ComponentActivity() {
 	private val mainViewModel: MainViewModel by viewModels()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		enableEdgeToEdge()
 
 		super.onCreate(savedInstanceState)
 
@@ -42,7 +46,12 @@ class MainActivity : ComponentActivity() {
 			WallpapersTheme(
 				darkTheme = isDarkTheme ?: isSystemInDarkTheme()
 			) {
-				WallpapersApp()
+				Box(
+					modifier = Modifier
+						.fillMaxSize()
+				) {
+					WallpapersApp()
+				}
 			}
 		}
 	}
