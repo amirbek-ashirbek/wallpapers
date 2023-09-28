@@ -165,6 +165,8 @@ fun SingleWallpaperScreenContent(
 							onApplyClicked = onApplyClicked,
 							onFavouriteClicked = onFavouriteClicked,
 							isFavourite = wallpaper.isFavourite,
+							modifier = Modifier
+								.padding(horizontal = 48.dp)
 						)
 					},
 					modifier = Modifier
