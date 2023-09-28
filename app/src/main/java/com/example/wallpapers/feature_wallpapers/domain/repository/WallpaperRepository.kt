@@ -1,4 +1,4 @@
-package com.example.wallpapers.feature_wallpapers.domain
+package com.example.wallpapers.feature_wallpapers.domain.repository
 
 import androidx.paging.PagingData
 import com.example.wallpapers.feature_wallpapers.domain.model.Wallpaper

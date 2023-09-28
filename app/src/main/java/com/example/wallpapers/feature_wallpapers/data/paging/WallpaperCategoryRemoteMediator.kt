@@ -5,10 +5,10 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.wallpapers.feature_wallpapers.data.local.WallpaperDatabase
+import com.example.wallpapers.feature_wallpapers.data.local.database.WallpaperDatabase
 import com.example.wallpapers.feature_wallpapers.data.local.model.WallpaperCategoryEntity
 import com.example.wallpapers.feature_wallpapers.data.local.model.WallpaperCategoryRemoteKeys
-import com.example.wallpapers.feature_wallpapers.data.remote.UnsplashApi
+import com.example.wallpapers.feature_wallpapers.data.remote.api.UnsplashApi
 import com.example.wallpapers.feature_wallpapers.data.remote.model.topics.TopicResponse
 import retrofit2.HttpException
 import java.io.IOException

@@ -1,7 +1,7 @@
 package com.example.wallpapers.feature_wallpapers.domain.use_case
 
 import androidx.paging.PagingData
-import com.example.wallpapers.feature_wallpapers.domain.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.domain.repository.WallpaperRepository
 import com.example.wallpapers.feature_wallpapers.domain.model.WallpaperCategory
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

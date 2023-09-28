@@ -8,5 +8,6 @@ data class SingleWallpaperState(
 	val wallpaperAppliedSuccessfully: Boolean = false,
 	val isWallpaperApplying: Boolean = false,
 	val isDownloading: Boolean = false,
-	val internetError: Boolean = false
+	val internetError: Boolean = false,
+	val otherError: Boolean = false
 )

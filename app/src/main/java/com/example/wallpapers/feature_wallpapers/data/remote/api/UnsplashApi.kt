@@ -1,4 +1,4 @@
-package com.example.wallpapers.feature_wallpapers.data.remote
+package com.example.wallpapers.feature_wallpapers.data.remote.api
 
 import com.example.wallpapers.BuildConfig
 import com.example.wallpapers.feature_wallpapers.data.remote.model.image.ImageResponse

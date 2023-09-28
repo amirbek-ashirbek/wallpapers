@@ -1,4 +1,4 @@
-package com.example.wallpapers.feature_wallpapers.data.local
+package com.example.wallpapers.feature_wallpapers.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

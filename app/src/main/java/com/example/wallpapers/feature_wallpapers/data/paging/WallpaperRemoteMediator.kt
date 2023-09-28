@@ -5,10 +5,10 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.wallpapers.feature_wallpapers.data.local.WallpaperDatabase
+import com.example.wallpapers.feature_wallpapers.data.local.database.WallpaperDatabase
 import com.example.wallpapers.feature_wallpapers.data.local.model.WallpaperEntity
 import com.example.wallpapers.feature_wallpapers.data.local.model.WallpaperRemoteKeys
-import com.example.wallpapers.feature_wallpapers.data.remote.UnsplashApi
+import com.example.wallpapers.feature_wallpapers.data.remote.api.UnsplashApi
 import com.example.wallpapers.feature_wallpapers.data.remote.model.image.ImageResponse.Companion.toWallpaperEntity
 import kotlinx.coroutines.flow.firstOrNull
 import okio.IOException

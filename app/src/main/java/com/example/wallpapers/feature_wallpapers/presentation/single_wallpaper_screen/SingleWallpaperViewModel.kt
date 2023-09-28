@@ -121,7 +121,7 @@ class SingleWallpaperViewModel @Inject constructor(
 				}
 
 				is DownloadResult.OtherError -> {
-					_uiState.update { it.copy(isDownloading = false) }
+					_uiState.update { it.copy(otherError = true, isDownloading = false) }
 				}
 			}
 		}

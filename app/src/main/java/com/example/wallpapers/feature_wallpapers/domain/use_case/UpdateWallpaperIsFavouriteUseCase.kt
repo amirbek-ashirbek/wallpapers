@@ -1,6 +1,6 @@
 package com.example.wallpapers.feature_wallpapers.domain.use_case
 
-import com.example.wallpapers.feature_wallpapers.domain.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.domain.repository.WallpaperRepository
 import com.example.wallpapers.feature_wallpapers.domain.model.Wallpaper
 import javax.inject.Inject
 

@@ -5,14 +5,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.example.wallpapers.feature_wallpapers.data.local.WallpaperDatabase
+import com.example.wallpapers.feature_wallpapers.data.local.database.WallpaperDatabase
 import com.example.wallpapers.feature_wallpapers.data.local.model.WallpaperCategoryEntity.Companion.toWallpaperCategory
 import com.example.wallpapers.feature_wallpapers.data.local.model.WallpaperEntity.Companion.toWallpaper
 import com.example.wallpapers.feature_wallpapers.data.local.model.WallpaperEntity.Companion.toWallpaperEntity
 import com.example.wallpapers.feature_wallpapers.data.paging.WallpaperCategoryRemoteMediator
 import com.example.wallpapers.feature_wallpapers.data.paging.WallpaperRemoteMediator
-import com.example.wallpapers.feature_wallpapers.data.remote.UnsplashApi
-import com.example.wallpapers.feature_wallpapers.domain.WallpaperRepository
+import com.example.wallpapers.feature_wallpapers.data.remote.api.UnsplashApi
+import com.example.wallpapers.feature_wallpapers.domain.repository.WallpaperRepository
 import com.example.wallpapers.feature_wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.domain.model.WallpaperCategory
 import com.example.wallpapers.util.Constants.ITEMS_PER_PAGE
