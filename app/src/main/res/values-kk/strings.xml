@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_screen">Негізгі экран</string>
+    <string name="lock_screen">Құлыптау экран</string>
+    <string name="home_and_lock_screens">Негізгі экран мен құлыптау экран</string>
+    <string name="download">Жүктеу</string>
+    <string name="apply">Орнату</string>
+    <string name="apply_wallpaper_on">Түсқағазды орнату</string>
+    <string name="wallpaper_set_successfully">Тұсқағаз ойдағыдай орнатылған</string>
+    <string name="error_occurred">Қате орын алды</string>
+    <string name="no_internet">Интернет байланысы жоқ</string>
+    <string name="check_your_internet_connection">Интернет байланысын тексеріп, қайталап көріңіз.</string>
+    <string name="ok">ОК</string>
+
+    <string name="favourite">Таңдаулылар</string>
+    <string name="wallpapers">Тұсқағаздар</string>
+    <string name="categories">Категориялар</string>
+    <string name="favourites">Таңдаулылар</string>
+    <string name="settings">Реттеулер</string>
+    <string name="dark_mode">Қараңғы көрініс</string>
+</resources>

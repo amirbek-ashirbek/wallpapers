@@ -68,7 +68,7 @@ fun ActionItem(
 	Box(
 		contentAlignment = Alignment.Center,
 		modifier = modifier
-			.size(72.dp)
+			.height(72.dp)
 			.clip(RoundedCornerShape(16.dp))
 			.clickable { onClick() }
 	) {
