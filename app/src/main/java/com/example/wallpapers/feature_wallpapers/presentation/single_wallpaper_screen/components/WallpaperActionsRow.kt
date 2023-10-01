@@ -42,13 +42,11 @@ fun WallpaperActionsRow(
 			title = stringResource(id = R.string.download),
 			onClick = onDownloadClicked
 		)
-//		Spacer(modifier = Modifier.width(64.dp))
 		ActionItem(
 			imageResId = R.drawable.icon_apply,
 			title = stringResource(id = R.string.apply),
 			onClick = onApplyClicked
 		)
-//		Spacer(modifier = Modifier.width(64.dp))
 		ActionItem(
 			imageResId = if (isFavourite) R.drawable.icon_heart_full else R.drawable.icon_heart_empty,
 			title = stringResource(id = R.string.favourite),

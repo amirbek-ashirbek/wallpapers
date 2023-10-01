@@ -29,10 +29,21 @@ import com.example.wallpapers.feature_wallpapers.presentation.common.GradientOve
 fun WallpaperItem(
 	url: String,
 	isFavourite: Boolean,
+	isFavouriteClickable: Boolean,
+	onFavouriteIconClicked: () -> Unit,
 	onItemClicked: () -> Unit
 ) {
 
 	val iconHeight = remember { mutableIntStateOf(0) }
+	val favouriteIconModifier = Modifier
+			.size(40.dp)
+			.padding(bottom = 12.dp, end = 12.dp)
+			.onGloballyPositioned { coordinates ->
+				iconHeight.intValue = coordinates.size.height
+			}
+	if (isFavouriteClickable) {
+		favouriteIconModifier.clickable(onClick = onFavouriteIconClicked)
+	}
 
 	Box(
 		modifier = Modifier
@@ -67,13 +78,8 @@ fun WallpaperItem(
 			),
 			tint = Color.White,
 			contentDescription = null,
-			modifier = Modifier
-				.size(40.dp)
+			modifier = favouriteIconModifier
 				.align(Alignment.BottomEnd)
-				.padding(bottom = 12.dp, end = 12.dp)
-				.onGloballyPositioned { coordinates ->
-					iconHeight.intValue = coordinates.size.height
-				}
 		)
 	}
 }

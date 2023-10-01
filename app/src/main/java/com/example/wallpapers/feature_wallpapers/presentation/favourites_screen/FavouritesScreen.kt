@@ -71,7 +71,9 @@ fun FavouritesScreenContent(
 			Spacer(modifier = Modifier.height(16.dp))
 			WallpapersGrid(
 				wallpapers = wallpapers,
-				onWallpaperClicked = onWallpaperClicked
+				onWallpaperClicked = onWallpaperClicked,
+				isFavouriteIconClickable = false,
+				onFavouriteIconClicked = {}
 			)
 		}
 	}

@@ -8,6 +8,7 @@ import androidx.paging.cachedIn
 import com.example.wallpapers.feature_wallpapers.domain.model.Wallpaper
 import com.example.wallpapers.feature_wallpapers.domain.use_case.GetCategoriesUseCase
 import com.example.wallpapers.feature_wallpapers.domain.use_case.GetWallpapersByCategoryUseCase
+import com.example.wallpapers.feature_wallpapers.domain.use_case.UpdateWallpaperIsFavouriteUseCase
 import com.example.wallpapers.navArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class WallpapersViewModel @Inject constructor(
 	private val getWallpapersByCategoryUseCase: GetWallpapersByCategoryUseCase,
 	private val getCategoriesUseCase: GetCategoriesUseCase,
+	private val updateWallpaperIsFavouriteUseCase: UpdateWallpaperIsFavouriteUseCase,
 	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -43,6 +45,9 @@ class WallpapersViewModel @Inject constructor(
 				_uiState.update { it.copy(selectedCategoryId = event.category.id) }
 				getWallpapersByCategory(categoryId = event.category.id)
 			}
+			is WallpapersEvent.FavouriteIconClicked -> {
+				updateWallpaperIsFavourite(wallpaper = event.wallpaper)
+			}
 		}
 	}
 
@@ -61,6 +66,12 @@ class WallpapersViewModel @Inject constructor(
 			getCategoriesUseCase.execute().collect { categories ->
 				_uiState.update { it.copy(categories = categories) }
 			}
+		}
+	}
+
+	private fun updateWallpaperIsFavourite(wallpaper: Wallpaper) {
+		viewModelScope.launch {
+			updateWallpaperIsFavouriteUseCase.execute(wallpaper = wallpaper)
 		}
 	}
 

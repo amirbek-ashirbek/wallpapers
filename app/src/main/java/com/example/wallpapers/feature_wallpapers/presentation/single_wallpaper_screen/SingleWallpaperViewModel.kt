@@ -129,8 +129,7 @@ class SingleWallpaperViewModel @Inject constructor(
 
 	private fun updateWallpaperIsFavourite(wallpaper: Wallpaper) {
 		viewModelScope.launch {
-			val updatedWallpaper = wallpaper.copy(isFavourite = !wallpaper.isFavourite)
-			updateWallpaperIsFavouriteUseCase.execute(wallpaper = updatedWallpaper)
+			updateWallpaperIsFavouriteUseCase.execute(wallpaper = wallpaper)
 		}
 	}
 

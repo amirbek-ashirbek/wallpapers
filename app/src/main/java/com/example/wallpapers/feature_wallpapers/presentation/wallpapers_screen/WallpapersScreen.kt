@@ -49,6 +49,9 @@ fun WallpapersScreen(
 				)
 			)
 		},
+		onFavouriteIconClicked = { wallpaper ->
+			wallpapersViewModel.onEvent(WallpapersEvent.FavouriteIconClicked(wallpaper = wallpaper))
+		},
 		onCategoryClicked = { category ->
 			wallpapersViewModel.onEvent(WallpapersEvent.CategoryItemClicked(category))
 		},
@@ -63,6 +66,7 @@ fun WallpapersScreenContent(
 	headerTitle: String,
 	uiState: WallpapersState,
 	onWallpaperClicked: (Wallpaper) -> Unit,
+	onFavouriteIconClicked: (Wallpaper) -> Unit,
 	onCategoryClicked: (WallpaperCategory) -> Unit,
 	onBackClicked: () -> Unit
 ) {
@@ -90,7 +94,11 @@ fun WallpapersScreenContent(
 			Spacer(modifier = Modifier.height(16.dp))
 			WallpapersGrid(
 				wallpapers = wallpapers,
-				onWallpaperClicked = onWallpaperClicked
+				onWallpaperClicked = onWallpaperClicked,
+				isFavouriteIconClickable = true,
+				onFavouriteIconClicked = { wallpaper ->
+					onFavouriteIconClicked(wallpaper)
+				}
 			)
 		}
 	}
