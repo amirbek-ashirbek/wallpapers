@@ -24,26 +24,26 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.wallpapers.R
 import com.example.wallpapers.feature_wallpapers.presentation.common.GradientOverlay
+import com.example.wallpapers.feature_wallpapers.presentation.common.noRippleClickable
 
 @Composable
 fun WallpaperItem(
 	url: String,
 	isFavourite: Boolean,
-	isFavouriteClickable: Boolean,
 	onFavouriteIconClicked: () -> Unit,
 	onItemClicked: () -> Unit
 ) {
 
 	val iconHeight = remember { mutableIntStateOf(0) }
 	val favouriteIconModifier = Modifier
-			.size(40.dp)
-			.padding(bottom = 12.dp, end = 12.dp)
-			.onGloballyPositioned { coordinates ->
-				iconHeight.intValue = coordinates.size.height
-			}
-	if (isFavouriteClickable) {
-		favouriteIconModifier.clickable(onClick = onFavouriteIconClicked)
-	}
+		.size(40.dp)
+		.padding(bottom = 12.dp, end = 12.dp)
+		.onGloballyPositioned { coordinates ->
+			iconHeight.intValue = coordinates.size.height
+		}
+		.noRippleClickable(
+			onClick = onFavouriteIconClicked
+		)
 
 	Box(
 		modifier = Modifier

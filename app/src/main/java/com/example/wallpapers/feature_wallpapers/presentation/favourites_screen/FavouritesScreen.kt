@@ -72,7 +72,6 @@ fun FavouritesScreenContent(
 			WallpapersGrid(
 				wallpapers = wallpapers,
 				onWallpaperClicked = onWallpaperClicked,
-				isFavouriteIconClickable = false,
 				onFavouriteIconClicked = {}
 			)
 		}

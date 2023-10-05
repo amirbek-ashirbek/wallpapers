@@ -16,7 +16,6 @@ import com.example.wallpapers.feature_wallpapers.domain.model.Wallpaper
 fun WallpapersGrid(
 	wallpapers: LazyPagingItems<Wallpaper>,
 	onWallpaperClicked: (Wallpaper) -> Unit,
-	isFavouriteIconClickable: Boolean,
 	onFavouriteIconClicked: (Wallpaper) -> Unit,
 	modifier: Modifier = Modifier
 ) {
@@ -38,7 +37,6 @@ fun WallpapersGrid(
 				WallpaperItem(
 					url = wallpaper.url,
 					isFavourite = wallpaper.isFavourite,
-					isFavouriteClickable = isFavouriteIconClickable,
 					onFavouriteIconClicked = { onFavouriteIconClicked(wallpaper) },
 					onItemClicked = { onWallpaperClicked(wallpaper) }
 				)
