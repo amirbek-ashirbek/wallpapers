@@ -75,6 +75,7 @@ android {
 }
 
 dependencies {
+	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 	val room_version = "2.5.2"
 
 	implementation("androidx.activity:activity-ktx:1.8.0-beta01")
@@ -143,5 +144,9 @@ dependencies {
 
 	// DataStore
 	implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+	testImplementation("io.mockk:mockk:1.13.8")
+	testImplementation("com.google.truth:truth:1.1.4")
+	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 
 }
