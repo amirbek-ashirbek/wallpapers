@@ -1,7 +1,7 @@
-package com.example.wallpapers.feature_wallpapers.domain.use_case
+package com.amirbek.wallpapers.feature_wallpapers.domain.use_case
 
-import com.example.wallpapers.feature_wallpapers.domain.model.WallpaperCategory
-import com.example.wallpapers.feature_wallpapers.domain.repository.WallpaperRepository
+import com.amirbek.wallpapers.feature_wallpapers.domain.model.WallpaperCategory
+import com.amirbek.wallpapers.feature_wallpapers.domain.repository.WallpaperRepository
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
