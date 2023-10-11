@@ -8,8 +8,7 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
 import io.mockk.slot
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
@@ -25,7 +24,7 @@ class UpdateWallpaperIsFavouriteUseCaseTest {
 	}
 
 	@Test
-	fun `execute calls repository function with correctly updated wallpaper`() = runBlocking(Dispatchers.IO) {
+	fun `execute calls repository function with correctly updated wallpaper`() = runTest {
 
 		// Arrange
 		val wallpaper = Wallpaper("id", "categoryId","url","downloadUrl", isFavourite = false)

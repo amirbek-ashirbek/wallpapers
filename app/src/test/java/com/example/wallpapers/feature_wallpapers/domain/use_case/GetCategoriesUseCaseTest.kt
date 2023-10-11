@@ -6,7 +6,7 @@ import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
@@ -34,7 +34,7 @@ class GetCategoriesUseCaseTest {
 		val flow = getCategoriesUseCase.execute()
 
 		// Assert
-		runBlocking {
+		runTest {
 			flow.collect { categories ->
 				assertThat(categories).isNotNull()
 			}
@@ -52,7 +52,7 @@ class GetCategoriesUseCaseTest {
 		val flow = getCategoriesUseCase.execute()
 
 		// Assert
-		runBlocking {
+		runTest {
 			flow.collect { categories ->
 				assertThat(categories).isEmpty()
 			}
