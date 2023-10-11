@@ -147,7 +147,7 @@ dependencies {
 	// DataStore
 	implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-  // Testing
+    // Testing
 	testImplementation("io.mockk:mockk:1.13.8")
 	testImplementation("com.google.truth:truth:1.1.4")
 	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
