@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "139072015865",
+    "project_id": "amirbekwallpapers",
+    "storage_bucket": "amirbekwallpapers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139072015865:android:8090bebbd96551ceddc128",
+        "android_client_info": {
+          "package_name": "com.amirbek.wallpapers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYvG6R40s8ExHRwo0F6C3EI2QDVVOgyyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
