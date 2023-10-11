@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-	namespace = "com.example.wallpapers"
+	namespace = "com.amirbek.wallpapers"
 	compileSdk = 34
 
 	defaultConfig {
-		applicationId = "com.example.wallpapers"
+		applicationId = "com.amirbek.wallpapers"
 		minSdk = 24
 		targetSdk = 33
 		versionCode = 1
